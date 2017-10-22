@@ -18,13 +18,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
+    public Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail, remove, signOut;
 
-    private EditText oldEmail, newEmail, password, newPassword;
-    private ProgressBar progressBar;
-    private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;
+    public EditText oldEmail, newEmail, password, newPassword;
+    public ProgressBar progressBar;
+    public FirebaseAuth.AuthStateListener authListener;
+    public FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
