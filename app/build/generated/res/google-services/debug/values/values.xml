@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">80327170921-r8vl2k29j2tf1h897kdro9svkc0kk73p.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://cookbook-d0233.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">80327170921</string>
+    <string name="google_api_key" translatable="false">AIzaSyBx37LhsgRd1f3F5W_P0xTXh7-ut7JjJvs</string>
+    <string name="google_app_id" translatable="false">1:80327170921:android:5a8329597fbfa6ff</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBx37LhsgRd1f3F5W_P0xTXh7-ut7JjJvs</string>
+    <string name="google_storage_bucket" translatable="false">cookbook-d0233.appspot.com</string>
+    <string name="project_id" translatable="false">cookbook-d0233</string>
+</resources>
