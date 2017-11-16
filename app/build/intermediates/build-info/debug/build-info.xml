@@ -5,35 +5,31 @@
     build-mode="COLD"
     density="xxxhdpi"
     format="10"
-    ir-eligibility="COMPATIBLE"
     plugin-version="3.0.0"
-    timestamp="1510633498376"
+    timestamp="1510820220265"
     token="8111960245599548703"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="386" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="21" />
+        duration="0" />
     <task
         name="verifier"
-        duration="4" />
+        duration="0" />
 
-    <artifact
-        location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
-        type="SPLIT" />
     <artifact
         location="C:\Users\Hai Bui\Desktop\CookBook\app\build\outputs\apk\debug\app-debug.apk"
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1510626783500"
+        timestamp="1510819340771"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
@@ -46,6 +42,9 @@
             type="SPLIT" />
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
             type="SPLIT" />
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
@@ -68,14 +67,11 @@
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
-        <artifact
-            location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
     </build>
     <build
         build-mode="COLD"
         ir-eligibility="R_CLASS_CHANGE"
-        timestamp="1510630668338"
+        timestamp="1510819503163"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
@@ -99,20 +95,16 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1510633103804"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\Hai Bui\Desktop\CookBook\app\build\outputs\apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
-    </build>
-    <build
-        build-mode="COLD"
-        ir-eligibility="COMPATIBLE"
-        timestamp="1510633498376"
+        timestamp="1510820068199"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1510820220265"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Hai Bui\Desktop\CookBook\app\build\outputs\apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />

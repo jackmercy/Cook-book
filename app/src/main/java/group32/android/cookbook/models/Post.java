@@ -28,4 +28,51 @@ public class Post {
         this.star = 0;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+
+    public double getStar() {
+        return star;
+    }
+
+    public void setStar(double star) {
+        this.star = star;
+    }
+
+    public int getStarCounter() {
+        return StarCounter;
+    }
+
+    public void setStarCounter(int starCounter) {
+        StarCounter = starCounter;
+    }
+
+    public double getTotalVotes() {
+        return totalVotes;
+    }
+
+    public void setTotalVotes(double totalVotes) {
+        this.totalVotes = totalVotes;
+    }
 }

@@ -312,6 +312,10 @@
         "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\a23c9fa2434567e0ad051db45993d866\\res\\drawable\\notification_icon_background.xml"
     },
     {
+        "merged": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_for_list_item.xml.flat",
+        "source": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\src\\main\\res\\layout\\item_for_list_item.xml"
+    },
+    {
         "merged": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_com_facebook_close.png.flat",
         "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-common-4.28.0.aar\\b9ab63a4114517d85a7cbc48c7f5d950\\res\\drawable-xhdpi-v4\\com_facebook_close.png"
     },
@@ -1018,6 +1022,10 @@
     {
         "merged": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_reset_password.xml.flat",
         "source": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\src\\main\\res\\layout\\activity_reset_password.xml"
+    },
+    {
+        "merged": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable_recycler_for_list_item_background.xml.flat",
+        "source": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\src\\main\\res\\drawable\\recycler_for_list_item_background.xml"
     },
     {
         "merged": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
