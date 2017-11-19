@@ -21,6 +21,7 @@ android {
 
 repositories {
     mavenCentral()
+    maven { url 'https://maven.google.com' }
     google()
 }
 dependencies {
@@ -36,6 +37,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.github.bumptech.glide:glide:4.3.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'
 
 }
 
