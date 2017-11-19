@@ -1,27 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-gu\\values-gu.xml",
+            "outputFile": "D:\\Android\\CookBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-gu\\values-gu.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\90a536fb12f3fd0afba8cf4d664d6836\\res\\values-gu\\values-gu.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.0.4.aar\\13de01956b11244dc05da2da3eed098f\\res\\values-gu\\values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,164,272,395,499,606,693,794,917,994,1072,1152,1258,1360,1457,1566,1665,1775,1896,1999,2079",
-                        "endColumns": "108,107,122,103,106,86,100,122,76,77,79,105,101,96,108,98,109,120,102,79,100",
-                        "endOffsets": "159,267,390,494,601,688,789,912,989,1067,1147,1253,1355,1452,1561,1660,1770,1891,1994,2074,2175"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "285",
+                        "endColumns": "205",
+                        "endOffsets": "490"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,61,62",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,214,322,445,549,656,743,844,967,1044,1122,1202,1308,1410,1507,1616,1715,1825,1946,7132,7212",
-                        "endColumns": "108,107,122,103,106,86,100,122,76,77,79,105,101,96,108,98,109,120,102,79,100",
-                        "endOffsets": "209,317,440,544,651,738,839,962,1039,1117,1197,1303,1405,1502,1611,1710,1820,1941,2044,7207,7308"
+                        "startLines": "51",
+                        "startColumns": "4",
+                        "startOffsets": "5607",
+                        "endColumns": "205",
+                        "endOffsets": "5808"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\3c62cff929f3a57dc30714f40555259e\\res\\values-gu\\values-gu.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.28.0.aar\\1d6d05e4e94ab68c799069a7bc4e8c7d\\res\\values-gu\\values-gu.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.0.4.aar\\12246d3b3f1d6ab9494d99b10269a8fc\\res\\values-gu\\values.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-11.0.4.aar\\86e94f2e16b46de83156380d80074b64\\res\\values-gu\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-11.0.4.aar\\7368ffab68e33dfb103313375acc38b1\\res\\values-gu\\values.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\20abbcd5f950cb30ac73a9b270a6d37c\\res\\values-gu\\values-gu.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "285",
-                        "endColumns": "205",
-                        "endOffsets": "490"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,164,272,395,499,606,693,794,917,994,1072,1152,1258,1360,1457,1566,1665,1775,1896,1999,2079",
+                        "endColumns": "108,107,122,103,106,86,100,122,76,77,79,105,101,96,108,98,109,120,102,79,100",
+                        "endOffsets": "159,267,390,494,601,688,789,912,989,1067,1147,1253,1355,1452,1561,1660,1770,1891,1994,2074,2175"
                     },
                     "to": {
-                        "startLines": "51",
-                        "startColumns": "4",
-                        "startOffsets": "5607",
-                        "endColumns": "205",
-                        "endOffsets": "5808"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,61,62",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,214,322,445,549,656,743,844,967,1044,1122,1202,1308,1410,1507,1616,1715,1825,1946,7132,7212",
+                        "endColumns": "108,107,122,103,106,86,100,122,76,77,79,105,101,96,108,98,109,120,102,79,100",
+                        "endOffsets": "209,317,440,544,651,738,839,962,1039,1117,1197,1303,1405,1502,1611,1710,1820,1941,2044,7207,7308"
                     }
                 }
             ]

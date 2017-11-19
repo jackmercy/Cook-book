@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Hai Bui\\Desktop\\CookBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "D:\\Android\\CookBook\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\90a536fb12f3fd0afba8cf4d664d6836\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\20abbcd5f950cb30ac73a9b270a6d37c\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Hai Bui\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\260b2e7283896ccc8eaf1d37610310fd\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\khoic\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\75054148f140d0b8644c14d095c5045e\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

@@ -82,11 +82,11 @@ public final class R {
         public static final int action_container = 0x7f08000e;
         public static final int action_divider = 0x7f080010;
         public static final int action_image = 0x7f080011;
-        public static final int action_text = 0x7f080018;
-        public static final int actions = 0x7f080019;
-        public static final int async = 0x7f080021;
-        public static final int blocking = 0x7f080026;
-        public static final int chronometer = 0x7f08003b;
+        public static final int action_text = 0x7f080017;
+        public static final int actions = 0x7f080018;
+        public static final int async = 0x7f080020;
+        public static final int blocking = 0x7f080025;
+        public static final int chronometer = 0x7f08003a;
         public static final int forever = 0x7f080066;
         public static final int icon = 0x7f08006b;
         public static final int icon_group = 0x7f08006c;
@@ -99,12 +99,12 @@ public final class R {
         public static final int notification_background = 0x7f08008c;
         public static final int notification_main_column = 0x7f08008d;
         public static final int notification_main_column_container = 0x7f08008e;
-        public static final int right_icon = 0x7f0800a2;
-        public static final int right_side = 0x7f0800a3;
-        public static final int text = 0x7f0800d4;
-        public static final int text2 = 0x7f0800d5;
-        public static final int time = 0x7f0800db;
-        public static final int title = 0x7f0800dc;
+        public static final int right_icon = 0x7f0800a4;
+        public static final int right_side = 0x7f0800a5;
+        public static final int text = 0x7f0800d6;
+        public static final int text2 = 0x7f0800d7;
+        public static final int time = 0x7f0800dd;
+        public static final int title = 0x7f0800de;
     }
     public static final class integer {
         public static final int status_bar_notification_info_maxnum = 0x7f09000a;
@@ -118,7 +118,7 @@ public final class R {
         public static final int notification_template_part_time = 0x7f0a0049;
     }
     public static final class string {
-        public static final int status_bar_notification_info_overflow = 0x7f0d0075;
+        public static final int status_bar_notification_info_overflow = 0x7f0d0076;
     }
     public static final class style {
         public static final int TextAppearance_Compat_Notification = 0x7f0e0116;
