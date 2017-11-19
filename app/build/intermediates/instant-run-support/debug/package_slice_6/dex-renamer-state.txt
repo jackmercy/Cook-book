@@ -1,4 +1,0 @@
-#Mon Nov 20 00:13:03 ICT 2017
-base.0=D\:\\Android\\CookBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6
-renamed.0=classes.dex
-file.0=D\:\\Android\\CookBook\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\6\\classes.dex
