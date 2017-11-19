@@ -94,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 */
+        listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 2", "Test 2", "Sample recipes"));
         listData.add(new Post("Author : HB 3", "Test 3", "Sample recipes"));
