@@ -28,6 +28,15 @@ public class Post {
         this.star = 0;
     }
 
+    public Post(Post newPost){
+        this.author = newPost.author;
+        this.title = newPost.title;
+        this.recipe = newPost.recipe;
+        this.StarCounter = newPost.StarCounter;
+        this.totalVotes = newPost.totalVotes;
+        this.star = newPost.StarCounter/newPost.totalVotes;
+    }
+
     public void setAuthor(String author) {
         this.author = author;
     }
