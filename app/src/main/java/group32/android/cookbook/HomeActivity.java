@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
-        mPostsReference = root_db.child("post");
+        mPostsReference = root_db.child("posts");
 
         //get current user
         //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -84,16 +84,6 @@ public class HomeActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }*/
-        listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
-        /*listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
-        listData.add(new Post("Author : HB 2", "Test 2", "Sample recipes"));
-        listData.add(new Post("Author : HB 3", "Test 3", "Sample recipes"));
-        listData.add(new Post("Author : HB 4", "Test 4", "Sample recipes"));
-        listData.add(new Post("Author : HB 5", "Test 1", "Sample recipes"));
-        listData.add(new Post("Author : HB 6", "Test 2", "Sample recipes"));
-        listData.add(new Post("Author : HB 7", "Test 3", "Sample recipes"));
-        listData.add(new Post("Author : HB 8", "Test 4", "Sample recipes"));*/
-        adapter.notifyDataSetChanged();
 
     }
 
@@ -115,10 +105,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get post information
-                /*Post newPost = dataSnapshot.getValue(Post.class);
-                Log.d("Home Activity", "Post details: " + newPost.getAuthor() + newPost.getTitle() + newPost.getStarCounter() );
-                listData.add(newPost);
-                adapter.notifyDataSetChanged();*/
                 Log.d("Home Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
