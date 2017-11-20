@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         //get current user
         //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        //check if user is logged in or not
+//        check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
