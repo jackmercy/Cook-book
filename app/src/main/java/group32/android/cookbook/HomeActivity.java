@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +17,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private List<Post> listData = new ArrayList();
     //public ProgressBar progressBar;
     private DatabaseReference mPostsReference;
+    private DatabaseReference root_db;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -54,10 +59,11 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new CustomListItemRecyclerAdapter(this, listData);
         recyclerView.setAdapter(adapter);
         // Initialize Database
-        mPostsReference = FirebaseDatabase.getInstance().getReference().child("post").child("01");
+        root_db = FirebaseDatabase.getInstance().getReference();
+        mPostsReference = root_db.child("post");
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -79,14 +85,14 @@ public class HomeActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }*/
         listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
-        listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
+        /*listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 2", "Test 2", "Sample recipes"));
         listData.add(new Post("Author : HB 3", "Test 3", "Sample recipes"));
         listData.add(new Post("Author : HB 4", "Test 4", "Sample recipes"));
         listData.add(new Post("Author : HB 5", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 6", "Test 2", "Sample recipes"));
         listData.add(new Post("Author : HB 7", "Test 3", "Sample recipes"));
-        listData.add(new Post("Author : HB 8", "Test 4", "Sample recipes"));
+        listData.add(new Post("Author : HB 8", "Test 4", "Sample recipes"));*/
         adapter.notifyDataSetChanged();
 
     }
@@ -104,14 +110,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
         auth.addAuthStateListener(authListener);
         //Retrieving basic data (1 key)
-        /*// Add value event listener to the post
-        mPostsReference.addValueEventListener(new ValueEventListener() {
+        // Add value event listener to the post
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get user information
-                Post newPost = dataSnapshot.getValue(Post.class);
+                // Get post information
+                /*Post newPost = dataSnapshot.getValue(Post.class);
                 Log.d("Home Activity", "Post details: " + newPost.getAuthor() + newPost.getTitle() + newPost.getStarCounter() );
-                listData.add(new Post(newPost));
+                listData.add(newPost);
+                adapter.notifyDataSetChanged();*/
+                Log.d("Home Activity", "Post details: ");
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Post newPost = postSnapshot.getValue(Post.class);
+                    listData.add(newPost);
+                }
                 adapter.notifyDataSetChanged();
             }
 
@@ -119,7 +131,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        };
+        mPostsReference.addValueEventListener(valueEventListener);
     }
 
     @Override

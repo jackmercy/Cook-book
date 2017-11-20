@@ -7,11 +7,12 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Post {
+    //public String
     public String author;
     public String title;
-    //public File image;
+    //public Uri image;
     public String recipe;
-    public int StarCounter; // 1 user vote X star=> StarCount += X;
+    public int starCounter; // 1 user vote X star=> StarCount += X;
     public double totalVotes; // 1 user vote => totalVotes++;
     public double star; // avg star of post
 
@@ -23,18 +24,18 @@ public class Post {
         this.author = author;
         this.title = title;
         this.recipe = recipe;
-        this.StarCounter = 0;
+        this.starCounter = 0;
         this.totalVotes = 0;
         this.star = 0;
     }
 
     public Post(Post newPost){
-        this.author = newPost.author;
-        this.title = newPost.title;
-        this.recipe = newPost.recipe;
-        this.StarCounter = newPost.StarCounter;
-        this.totalVotes = newPost.totalVotes;
-        this.star = newPost.StarCounter/newPost.totalVotes;
+        this.author = newPost.getAuthor();
+        this.title = newPost.getTitle();
+        this.recipe = newPost.getRecipe();
+        this.starCounter = newPost.getStarCounter();
+        this.totalVotes = newPost.getTotalVotes();
+        this.star = newPost.getStar();
     }
 
     public void setAuthor(String author) {
@@ -70,11 +71,11 @@ public class Post {
     }
 
     public int getStarCounter() {
-        return StarCounter;
+        return starCounter;
     }
 
     public void setStarCounter(int starCounter) {
-        StarCounter = starCounter;
+        starCounter = starCounter;
     }
 
     public double getTotalVotes() {
