@@ -13,6 +13,7 @@ MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Hai Bui\.gradle\c
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\825b81f9dcbb69a2c157bd7fce02e762\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-auth:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.0.4.aar\76929a2d60bc3d94d2f8126f8fec8aee\AndroidManifest.xml:16:1-21:12
 MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\ee9ded5c4e13809b8ae0c8d9ab2f5ca1\AndroidManifest.xml:17:1-28:12
+MERGED from [me.grantland:autofittextview:0.2.1] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\autofittextview-0.2.1.aar\2df15832e1f4aa4f36a071aa532a8b87\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-core:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-core-11.0.4.aar\74378625e001ba1e197db79f792c91b7\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.firebase:firebase-database:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-database-11.0.4.aar\7c3abff1195952709e8a8d790739ff46\AndroidManifest.xml:2:1-4:12
 MERGED from [com.android.support:transition:26.1.0] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\bd20aca6f353dcd8e7fe8ed472f3b254\AndroidManifest.xml:17:1-28:12
@@ -210,6 +211,8 @@ MERGED from [com.google.firebase:firebase-auth:11.0.4] C:\Users\Hai Bui\.gradle\
 MERGED from [com.google.firebase:firebase-auth:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.0.4.aar\76929a2d60bc3d94d2f8126f8fec8aee\AndroidManifest.xml:17:5-43
 MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\ee9ded5c4e13809b8ae0c8d9ab2f5ca1\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\ee9ded5c4e13809b8ae0c8d9ab2f5ca1\AndroidManifest.xml:20:5-44
+MERGED from [me.grantland:autofittextview:0.2.1] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\autofittextview-0.2.1.aar\2df15832e1f4aa4f36a071aa532a8b87\AndroidManifest.xml:7:5-9:41
+MERGED from [me.grantland:autofittextview:0.2.1] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\autofittextview-0.2.1.aar\2df15832e1f4aa4f36a071aa532a8b87\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:firebase-core:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-core-11.0.4.aar\74378625e001ba1e197db79f792c91b7\AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-core:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-core-11.0.4.aar\74378625e001ba1e197db79f792c91b7\AndroidManifest.xml:4:5-43
 MERGED from [com.google.firebase:firebase-database:11.0.4] C:\Users\Hai Bui\.gradle\caches\transforms-1\files-1.1\firebase-database-11.0.4.aar\7c3abff1195952709e8a8d790739ff46\AndroidManifest.xml:3:5-43

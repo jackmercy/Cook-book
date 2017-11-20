@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         //get current user
         //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        //check if user is logged in or not
+//        check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -74,8 +74,9 @@ public class HomeActivity extends AppCompatActivity {
                     // user auth state is changed - user is null
                     // launch login activity
 //                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    finish();
-                    startActivity(new Intent(HomeActivity.this, HomeActivity.class));
+//                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+//                    finish();
+
                 }
             }
         };
@@ -86,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }*/
 //        listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
-        listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes",5,5.5,5.5));
+        listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
         /*listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 2", "Test 2", "Sample recipes"));
         listData.add(new Post("Author : HB 3", "Test 3", "Sample recipes"));

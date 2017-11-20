@@ -13,7 +13,7 @@ public class Post {
     //public Uri image;
     public String recipe;
     public int starCounter; // 1 user vote X star=> StarCount += X;
-    public double totalVotes; // 1 user vote => totalVotes++;
+    public int totalVotes; // 1 user vote => totalVotes++;
     public double star; // avg star of post
 
     public Post() {
@@ -28,16 +28,6 @@ public class Post {
         this.totalVotes = 0;
         this.star = 0;
     }
-
-    public Post(String author, String title, String recipe , int starCounter,double totalVotes,double star) {
-        this.author = author;
-        this.title = title;
-        this.recipe = recipe;
-        this.starCounter = starCounter;
-        this.totalVotes = totalVotes;
-        this.star = totalVotes;
-    }
-
 
     public Post(Post newPost){
         this.author = newPost.getAuthor();
@@ -85,14 +75,14 @@ public class Post {
     }
 
     public void setStarCounter(int starCounter) {
-        starCounter = starCounter;
+        this.starCounter = starCounter;
     }
 
-    public double getTotalVotes() {
+    public int getTotalVotes() {
         return totalVotes;
     }
 
-    public void setTotalVotes(double totalVotes) {
+    public void setTotalVotes(int totalVotes) {
         this.totalVotes = totalVotes;
     }
 }
