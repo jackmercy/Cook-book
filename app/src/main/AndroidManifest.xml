@@ -14,17 +14,19 @@
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
         <activity android:name=".EditProfileActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".SampleActivity"/>
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".SampleActivity"/>
-        <activity android:name=".HomeActivity" />
     </application>
 
 

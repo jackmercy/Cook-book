@@ -62,12 +62,12 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
         View itemview;
         public PostHolder(View view){
             super(view);
-            txtTitle = (TextView) view.findViewById(R.id.txtTitle);
-            txtAuthor = (TextView) view.findViewById(R.id.txtAuthor);
-            txtRecipe = (TextView) view.findViewById(R.id.txtRecipe);
-            txtStar = (TextView) view.findViewById(R.id.txtStar);
-            txtStarCounter = (TextView) view.findViewById(R.id.txtStarCounter);
-            txtTotalVotes = (TextView) view.findViewById(R.id.txtTotalVotes);
+            txtTitle =  view.findViewById(R.id.txtTitle);
+            txtAuthor =  view.findViewById(R.id.txtAuthor);
+            txtRecipe =  view.findViewById(R.id.txtRecipe);
+            txtStar =  view.findViewById(R.id.txtStar);
+            txtStarCounter =  view.findViewById(R.id.txtStarCounter);
+            txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
         }
     }

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_setting"
-        android:title="Menu 1"
+        android:id="@+id/options_menu_edit_btn"
+        android:title="Edit profile"
         app:showAsAction="never" />
     <item
-        android:title="Menu 2"
+        android:title="Logout"
         android:id="@+id/id_set"
         app:showAsAction="never"
         />

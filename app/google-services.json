@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "80327170921-24k96pb78nc4g1cirva899099aoh8inl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "group32.android.cookbook",
+            "certificate_hash": "7f260d918f5d9bb86ee307ad7d91ada2a763a311"
+          }
+        },
+        {
+          "client_id": "80327170921-0v50h2dge1jk9n70q97e5gga48krv6oe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "group32.android.cookbook",
+            "certificate_hash": "fa1101d0739b7ad67861145636bf36d039fb1f2c"
+          }
+        },
+        {
           "client_id": "80327170921-01oeq99ljko6nebchl8lek4ut555g48p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
