@@ -73,10 +73,8 @@ public class HomeActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-//                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//                    finish();
-
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
                 }
             }
         };
