@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     private List<Post> listData = new ArrayList();
     //public ProgressBar progressBar;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mPostsReference;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
@@ -53,8 +53,9 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new CustomListItemRecyclerAdapter(this, listData);
         recyclerView.setAdapter(adapter);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        final String Uid = user.getUid();
+        // Initialize Database
+        mPostsReference = FirebaseDatabase.getInstance().getReference().child("post").child("01");
+
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -77,25 +78,6 @@ public class HomeActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }*/
-        //Retrieving basic data (1 key)
-        /*mDatabase.child("post").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get user information
-
-                Post newPost = dataSnapshot.getValue(Post.class);
-                listData.add(new Post(newPost));
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
-
-        listData.add(new Post("Author : HB -1", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 0", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 1", "Test 1", "Sample recipes"));
         listData.add(new Post("Author : HB 2", "Test 2", "Sample recipes"));
@@ -109,12 +91,44 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater mMenuInflater = getMenuInflater();
-        mMenuInflater.inflate(R.menu.cookbook_menu, menu);
-        return true;
-    }   */
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authListener);
+        //Retrieving basic data (1 key)
+        /*// Add value event listener to the post
+        mPostsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get user information
+                Post newPost = dataSnapshot.getValue(Post.class);
+                Log.d("Home Activity", "Post details: " + newPost.getAuthor() + newPost.getTitle() + newPost.getStarCounter() );
+                listData.add(new Post(newPost));
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
 
     public void showPopup(View v){
         final PopupMenu popup = new PopupMenu(this,v);
@@ -155,24 +169,8 @@ public class HomeActivity extends AppCompatActivity {
         auth.signOut();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (authListener != null) {
-            auth.removeAuthStateListener(authListener);
-        }
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
 }
