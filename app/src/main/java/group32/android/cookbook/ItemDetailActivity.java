@@ -17,13 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
+//import com.bumptech.glide.annotation.GlideModule;
+//import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,8 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
 
     private DatabaseReference database;
     private DatabaseReference itemDatabse;
+    private StorageReference imageRef;
+    private StorageReference childImageRef;
     private ValueEventListener mPostListener;
 
     private ItemDetail item = new ItemDetail();
@@ -62,6 +67,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
         // Initialize database
         database = FirebaseDatabase.getInstance().getReference();
         itemDatabse = database.child("itemdetail").child("01");
+        imageRef = FirebaseStorage.getInstance().getReference();
 
         // Initialize Views
         ivItemImage = (ImageView) findViewById(R.id.iv_item_image);
@@ -100,10 +106,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
         adapter = new CustomCommentArrayAdapter(ItemDetailActivity.this, R.layout.activity_item_custom_comment, arrComments);
         lvComments.setAdapter(adapter);
 
-        //Data processing
-/*        Glide.with(this)
-                .load("https://blog.beemart.vn/wp-content/uploads/2016/07/hoc-cach-lam-banh-hoa-que-don-gian-ma-hap-dan-vo-cung-1.jpg")
-                .into(ivItemImage);*/
+
         adapter.notifyDataSetChanged();
     }
 
@@ -127,6 +130,12 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
             }
         };
         itemDatabse.addValueEventListener(itemListener);
+        childImageRef = imageRef.child("P_20170407_183042.jpg");
+        //Data processing
+        Glide.with(this)
+                .using(new FirebaseImageLoader())
+                .load(childImageRef)
+                .into(ivItemImage);
     }
 
     @Override
