@@ -37,20 +37,21 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     }
 
     @Override
-    public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, int position)
+    public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
-        holder.txtTitle.setText((postData.get(position)).getTitle());
-        holder.txtAuthor.setText((postData.get(position)).getAuthor());
-        holder.txtRecipe.setText((postData.get(position)).getRecipe());
-        holder.txtStar.setText(String.valueOf((postData.get(position)).getStar()));
-        holder.txtStarCounter.setText(String.valueOf((postData.get(position)).getStarCounter()));
-        holder.txtTotalVotes.setText(String.valueOf((postData.get(position)).getTotalVotes()));
-
+        holder.txtTitle.setText(((Post)postData.get(position)).getTitle());
+        holder.txtAuthor.setText(((Post)postData.get(position)).getAuthor());
+        holder.txtRecipe.setText(((Post)postData.get(position)).getRecipe());
+        holder.txtStar.setText(String.valueOf(((Post)postData.get(position)).getStar()));
+//        holder.txtStarCounter.setText(String.valueOf(((Post)postData.get(position)).getStarCounter()));
+        holder.txtTotalVotes.setText(String.valueOf(((Post)postData.get(position)).getTotalVotes()));
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context,EditProfileActivity.class);//Thay đổi activity chỗ này
                 i.putExtra("KEY","UID of post");
+                //sử dụng dòng này khi có UID Post
+//                i.putExtra("KEY",String.valueOf((Post)postData.get(position).getUID()));
                 context.startActivity(i);
             }
         });
@@ -66,7 +67,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
             txtAuthor =  view.findViewById(R.id.txtAuthor);
             txtRecipe =  view.findViewById(R.id.txtRecipe);
             txtStar =  view.findViewById(R.id.txtStar);
-            txtStarCounter =  view.findViewById(R.id.txtStarCounter);
+//            txtStarCounter =  view.findViewById(R.id.txtStarCounter);
             txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
         }

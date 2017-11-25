@@ -4,11 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:background="@drawable/recycler_for_list_item_background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="0.5dp">
         <me.grantland.widget.AutofitTextView
             android:id="@+id/txtTitle"
             android:layout_width="0dp"
@@ -20,7 +24,8 @@
             android:textSize="25dp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:textColor="@color/rc_item_title"/>
         <me.grantland.widget.AutofitTextView
             android:id="@+id/txtAuthor"
             android:layout_width="0dp"
@@ -32,7 +37,9 @@
             android:maxLines="1"
             android:autoSizeTextType="uniform"
             android:gravity="center"
-            android:padding="2dp"/>
+            android:padding="2dp"
+            android:layout_marginLeft="0.5dp"
+            android:textColor="@color/rc_item_title"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,8 +49,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/recycler_for_list_item_background">
+            android:orientation="vertical">
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -54,44 +60,61 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:background="@drawable/recycler_for_list_item_background">
+                android:paddingBottom="3dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/recycler_for_list_item_background">
-                    <TextView
-                        android:id="@+id/txtStar"
-                        android:layout_width="match_parent"
+                    android:gravity="center">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="0.0"
-                        android:gravity="center"
-                        android:textSize="15dp"
-                        android:background="@drawable/recycler_for_list_item_background"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/txtStarCounter"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:background="@drawable/recycler_for_list_item_background"/>
-                    <TextView
-                        android:id="@+id/txtTotalVotes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:background="@drawable/recycler_for_list_item_background"/>
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/txtStar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="0.0"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="/"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="5"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text=" ("
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:id="@+id/txtTotalVotes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="150"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text=")"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -109,8 +132,8 @@
                 app:minTextSize="15dp"
                 android:maxLines="8"
                 android:padding="3dp"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/recycler_for_list_item_background"/>
+                android:layout_marginLeft="0.5dp"
+                android:textColor="@color/rc_item_text"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
