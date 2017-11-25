@@ -34,16 +34,18 @@ import group32.android.cookbook.adapter.CustomCommentArrayAdapter;
 import group32.android.cookbook.models.Comment;
 import group32.android.cookbook.models.ItemDetail;
 import group32.android.cookbook.models.Post;
+import group32.android.cookbook.models.User;
 //import com.bumptech.glide.request.RequestOptions.Error;
 
 
-public class ItemDetailActivity extends AppCompatActivity implements View.OnTouchListener {
+public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Data variable
     //public static final String EXTRA_POST_KEY = "post_key";
 
     private DatabaseReference database;
     private DatabaseReference itemDatabse;
+    private DatabaseReference ratingDatabase;
     private StorageReference imageRef;
     private StorageReference childImageRef;
     private ValueEventListener mPostListener;
@@ -77,10 +79,8 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
         lvComments = (ListView) findViewById(R.id.lv_comments);
         ratingBarView = (RatingBar) findViewById(R.id.rating_bar);
         btnComment = (Button) findViewById(R.id.btn_comment);
+        btnComment.setOnClickListener(this);
 
-        ratingBarView.setOnTouchListener(this);
-
-        //btnComment.setOnClickListener();
         //Retrive uid from put extra
 /*        String newString;
         if (savedInstanceState == null) {
@@ -94,53 +94,85 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnTouc
             newString= (String)savedInstanceState.getSerializable("KEY");
         }*/
 
-
-        //Array mock data
-        arrComments.add(new Comment("Alan", "This is a good recipe."));
-        arrComments.add(new Comment("Alan", "This is a good recipe."));
-        arrComments.add(new Comment("Alan", "This is a good recipe."));
-        arrComments.add(new Comment("Alan", "This is a good recipe."));
-        arrComments.add(new Comment("Alan", "Thank you, good one"));
-
         //Data initialize
         adapter = new CustomCommentArrayAdapter(ItemDetailActivity.this, R.layout.activity_item_custom_comment, arrComments);
         lvComments.setAdapter(adapter);
-
-
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStart(){
         super.onStart();
+        //Get a post data
         ValueEventListener itemListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get ItemDetail object and use the values to update the UI
                 item = dataSnapshot.getValue(ItemDetail.class);
-                // [START_EXCLUDE]
+
+                //Get comment array
+                for (DataSnapshot commentSnapshot: dataSnapshot.child("post-comment").getChildren()){
+                    Comment newComment = commentSnapshot.getValue(Comment.class);
+                    arrComments.add(newComment);
+                }
+                // Assign data into view
                 tvItemTitle.setText(item.getDataTitle());
                 tvItemContent.setText(item.getDataContent());
                 ratingBarView.setRating(item.getRatingNumber());
-                // [END_EXCLUDE]
+                childImageRef = imageRef.child(item.getDataImage());
+
+                //Data processing
+                Glide.with(ItemDetailActivity.this)
+                        .using(new FirebaseImageLoader())
+                        .load(childImageRef)
+                        .into(ivItemImage);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
         };
         itemDatabse.addValueEventListener(itemListener);
-        childImageRef = imageRef.child("P_20170407_183042.jpg");
-        //Data processing
-        Glide.with(this)
-                .using(new FirebaseImageLoader())
-                .load(childImageRef)
-                .into(ivItemImage);
+
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent){
+    protected void onStop(){
+        super.onStop();
+        float currentStar = item.getRatingNumber();
+        float star;
+        star = ratingBarView.getRating();
+
+        //If not rated
+        if (currentStar >= 0){
+        item.setRatingNumber((ratingBarView.getRating() + currentStar)/2);
+        }
+        else {
         item.setRatingNumber(ratingBarView.getNumStars());
-        return false;
+        }
+
+        ratingDatabase = itemDatabse.child("ratingNumber");
+        ratingDatabase.setValue(item.getRatingNumber());
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        //Back to previous activity
+        finish();
+    }
+
+    @Override
+    public void onClick (View view){
+        User user = new User("Alan", "alannguyen@gmail.com");
+        Comment newComment = new Comment();
+        newComment.setAuthor(user.displayName);
+        newComment.setMessage(editComment.getText().toString());
+        arrComments.add(newComment);
+        editComment.getText().clear();
+        itemDatabse.child("post-comment").push().setValue(newComment);
     }
 }

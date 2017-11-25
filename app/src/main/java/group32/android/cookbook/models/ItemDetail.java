@@ -1,5 +1,7 @@
 package group32.android.cookbook.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by linhv on 11/19/2017.
  */
@@ -8,7 +10,8 @@ public class ItemDetail {
     String dataTitle;
     String dataImage;
     String dataContent;
-    int ratingNumber;
+    float ratingStar;
+    ArrayList<Comment> dataComments;
 
     public String getDataTitle(){
         return dataTitle;
@@ -19,8 +22,8 @@ public class ItemDetail {
     public String getDataContent(){
         return dataContent;
     }
-    public int getRatingNumber(){
-        return ratingNumber;
+    public float getRatingNumber(){
+        return ratingStar;
     }
     public void setDataContent(String dataContent) {
         this.dataContent = dataContent;
@@ -34,7 +37,7 @@ public class ItemDetail {
         this.dataTitle = dataTitle;
     }
 
-    public void setRatingNumber(int ratingNumber) {
-        this.ratingNumber = ratingNumber;
+    public void setRatingNumber(float ratingStar) {
+        this.ratingStar = ratingStar;
     }
 }
