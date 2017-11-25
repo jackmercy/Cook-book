@@ -39,12 +39,12 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     @Override
     public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, int position)
     {
-        holder.txtTitle.setText(((Post)postData.get(position)).getTitle());
-        holder.txtAuthor.setText(((Post)postData.get(position)).getAuthor());
-        holder.txtRecipe.setText(((Post)postData.get(position)).getRecipe());
-        holder.txtStar.setText(String.valueOf(((Post)postData.get(position)).getStar()));
-        holder.txtStarCounter.setText(String.valueOf(((Post)postData.get(position)).getStarCounter()));
-        holder.txtTotalVotes.setText(String.valueOf(((Post)postData.get(position)).getTotalVotes()));
+        holder.txtTitle.setText((postData.get(position)).getTitle());
+        holder.txtAuthor.setText((postData.get(position)).getAuthor());
+        holder.txtRecipe.setText((postData.get(position)).getRecipe());
+        holder.txtStar.setText(String.valueOf((postData.get(position)).getStar()));
+        holder.txtStarCounter.setText(String.valueOf((postData.get(position)).getStarCounter()));
+        holder.txtTotalVotes.setText(String.valueOf((postData.get(position)).getTotalVotes()));
 
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override

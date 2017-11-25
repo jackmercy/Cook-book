@@ -12,7 +12,7 @@ public class Post {
     public String title;
     //public Uri image;
     public String recipe;
-    public int starCounter; // 1 user vote X star=> StarCount += X;
+    public double starCounter; // 1 user vote X star=> StarCount += X;
     public int totalVotes; // 1 user vote => totalVotes++;
     public double star; // avg star of post
 
@@ -63,14 +63,14 @@ public class Post {
     }
 
     public double getStar() {
-        return star;
+        return  this.getStarCounter()/this.getTotalVotes();
     }
 
     public void setStar(double star) {
         this.star = star;
     }
 
-    public int getStarCounter() {
+    public double getStarCounter() {
         return starCounter;
     }
 
