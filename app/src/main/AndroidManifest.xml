@@ -32,6 +32,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".PostDetailsActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
     </application>
 </manifest>
