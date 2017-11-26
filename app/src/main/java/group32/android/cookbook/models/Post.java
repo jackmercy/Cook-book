@@ -7,12 +7,13 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Post {
+    //public String
     public String author;
     public String title;
-    //public File image;
+    //public Uri image;
     public String recipe;
-    public int StarCounter; // 1 user vote X star=> StarCount += X;
-    public double totalVotes; // 1 user vote => totalVotes++;
+    public double starCounter; // 1 user vote X star=> StarCount += X;
+    public int totalVotes; // 1 user vote => totalVotes++;
     public double star; // avg star of post
 
     public Post() {
@@ -23,9 +24,65 @@ public class Post {
         this.author = author;
         this.title = title;
         this.recipe = recipe;
-        this.StarCounter = 0;
+        this.starCounter = 0;
         this.totalVotes = 0;
         this.star = 0;
     }
 
+    public Post(Post newPost){
+        this.author = newPost.getAuthor();
+        this.title = newPost.getTitle();
+        this.recipe = newPost.getRecipe();
+        this.starCounter = newPost.getStarCounter();
+        this.totalVotes = newPost.getTotalVotes();
+        this.star = newPost.getStar();
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+
+    public double getStar() {
+        return  this.getStarCounter()/this.getTotalVotes();
+    }
+
+    public void setStar(double star) {
+        this.star = star;
+    }
+
+    public double getStarCounter() {
+        return starCounter;
+    }
+
+    public void setStarCounter(int starCounter) {
+        this.starCounter = starCounter;
+    }
+
+    public int getTotalVotes() {
+        return totalVotes;
+    }
+
+    public void setTotalVotes(int totalVotes) {
+        this.totalVotes = totalVotes;
+    }
 }
