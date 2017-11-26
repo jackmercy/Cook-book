@@ -7,8 +7,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class User {
-    public String displayName;
-    public String email;
+    private String displayName;
+    private String email;
     //public String password;
 
     public User() {
@@ -21,4 +21,10 @@ public class User {
         //this.password = password;
     }
 
+
+    public String getDisplayName(){ return  this.displayName; }
+    public String getEmail() { return  this.email; }
+
+    public void setDisplayName(String username) { this.displayName = username; }
+    public void setEmail(String email) { this.email = email; }
 }

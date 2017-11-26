@@ -90,8 +90,8 @@ public class SampleActivity extends AppCompatActivity {
                         // Get user information
 
                         User newUser = dataSnapshot.getValue(User.class);
-                        String name =  newUser.displayName;
-                        String email = newUser.email;
+                        String name =  newUser.getDisplayName();
+                        String email = newUser.getEmail();
 
 
                         // put it to text view

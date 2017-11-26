@@ -3,6 +3,7 @@ package group32.android.cookbook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,10 +44,12 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
     private StorageReference imageRef;
     private StorageReference childImageRef;
     private ValueEventListener mPostListener;
-
+    private DatabaseReference userRef;
+    private DatabaseReference dbRef;
     private ItemDetail item = new ItemDetail();
     private ArrayList<Comment> arrComments = new ArrayList<Comment>();
     private CustomCommentArrayAdapter adapter;
+    private User _user;
 
     private ImageView ivItemImage;
     private TextView tvItemContent, tvItemTitle;
@@ -59,6 +63,42 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_details);
 
+        //get current user
+        //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String UserID = getUid();
+        dbRef = FirebaseDatabase.getInstance().getReference();
+        userRef = dbRef.child("users").child(UserID);
+        Log.d("POSE DETAILS","user id " + UserID + userRef);
+
+        /*ValueEventListener UserInformation = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get User object once
+                _user = dataSnapshot.getValue(User.class);
+                Log.d("POST DETAILS","USER: "+ dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("User debug", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        userRef.addListenerForSingleValueEvent(UserInformation);*/
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get User object once
+                _user = dataSnapshot.getValue(User.class);
+                Log.d("POST DETAILS","USER: "+ dataSnapshot.getValue());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("User debug", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
         // Initialize Views
         ivItemImage = findViewById(R.id.iv_item_image);
         tvItemContent = findViewById(R.id.tv_item_content);
@@ -70,25 +110,25 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         btnComment.setOnClickListener(this);
 
         //Retrive uid from put extra
-        String newUid;
+        String newPostUid;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
-                newUid = null;
+                newPostUid = null;
                 Intent intent = new Intent(PostDetailsActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             } else {
-                newUid = extras.getString(EXTRA_POST_KEY);
+                newPostUid = extras.getString(EXTRA_POST_KEY);
             }
         } else {
-            newUid = (String) savedInstanceState.getSerializable(EXTRA_POST_KEY);
+            newPostUid = (String) savedInstanceState.getSerializable(EXTRA_POST_KEY);
         }
 
         // Initialize database
         database = FirebaseDatabase.getInstance().getReference();
-        assert newUid != null;
-        itemDatabse = database.child("itemdetail").child(newUid);
+        assert newPostUid != null;
+        itemDatabse = database.child("posts").child(newPostUid);
         imageRef = FirebaseStorage.getInstance().getReference();
 
         //Data initialize
@@ -163,13 +203,20 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        User user = new User("Alan", "alannguyen@gmail.com");
-        Comment newComment = new Comment();
-        newComment.setAuthor(user.displayName);
-        newComment.setMessage(editComment.getText().toString());
-        arrComments.add(newComment);
-        editComment.getText().clear();
-        itemDatabse.child("post-comment").push().setValue(newComment);
+
+        if(_user.getDisplayName() != null){
+            Comment newComment = new Comment();
+            newComment.setAuthor(_user.getDisplayName());
+            newComment.setMessage(editComment.getText().toString());
+            arrComments.add(newComment);
+            editComment.getText().clear();
+            itemDatabse.child("post-comment").push().setValue(newComment);
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Username is null",Toast.LENGTH_SHORT).show();
+        }
+        //Log.d("POST DETAILS","USER: "+ _user.getDisplayName() + " " + _user.getEmail());
+        //User user = new User("Alan", "alannguyen@gmail.com");
     }
 
     /*@Override
@@ -183,4 +230,8 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         }
         return super.onKeyDown(keyCode, event);
     }*/
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 }

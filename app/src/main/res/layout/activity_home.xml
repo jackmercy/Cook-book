@@ -10,8 +10,8 @@
         android:id="@+id/home_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:layout_gravity="center_vertical|start"
+        android:background="@color/colorAccent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
@@ -19,42 +19,35 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical|start"
             android:layout_marginEnd="15dp"
+            android:paddingEnd="120dp"
+            android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:text="@string/app_name"
-            android:textSize="18sp"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@color/colorPrimary"
-            android:paddingEnd="160dp"
-            android:paddingStart="20dp"/>
+            android:textSize="18sp" />
 
 
         <android.support.v7.widget.ActionMenuView
-            android:layout_height="match_parent"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="end">
 
             <ImageButton
                 android:id="@+id/options_menu"
                 style="@style/Widget.AppCompat.ImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/com_facebook_tooltip_black_bottomnub"
+                android:layout_width="45dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="50dp"
+                android:background="@android:drawable/ic_menu_more"
                 android:contentDescription="@string/title_activity_profile"
                 android:onClick="showPopup"
-                android:layout_marginEnd="50dp"
                 app:layout_anchor="@+id/home_name"
                 app:layout_anchorGravity="right" />
         </android.support.v7.widget.ActionMenuView>
         <!---->
     </android.support.v7.widget.Toolbar>
 
-
-    <Button
-        android:id="@+id/btn_newPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Post"
-        android:layout_gravity="center"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
