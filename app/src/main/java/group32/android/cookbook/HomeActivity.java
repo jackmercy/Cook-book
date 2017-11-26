@@ -80,13 +80,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         };
-
-        /*progressBar =  findViewById(R.id.progressBar);
-
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }*/
-
     }
 
 
@@ -150,14 +143,17 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.new_post_btn:
+                        //navigate to new post activity
+                        return true;
                     case R.id.options_menu_edit_btn:
                         startActivity(new Intent(HomeActivity.this, EditProfileActivity.class));
-                        finish();
                         //Toast.makeText(getApplicationContext(), "edit clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.id_set:
                         signOut();
                         Toast.makeText(getApplicationContext(), "nope", Toast.LENGTH_SHORT).show();
+                        finish();
                         return true;
                     default:
                         return false;
