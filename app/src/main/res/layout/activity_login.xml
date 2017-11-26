@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="group32.android.cookbook.LoginActivity">
+    tools:context="group32.android.cookbook.LoginFeatures.LoginActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

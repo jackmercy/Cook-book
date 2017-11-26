@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import group32.android.cookbook.LoginFeatures.LoginActivity;
+import group32.android.cookbook.adapter.CustomListItemRecyclerAdapter;
 import group32.android.cookbook.models.Post;
 
 
@@ -65,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         //get current user
         //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-//        check if user is logged in or not
+        //check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -107,6 +109,9 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d("Home Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
+                    assert newPost != null;
+                    newPost.setUid(postSnapshot.getKey());
+                    Log.d("UID POST", String.format("Uid is %s", newPost.getUid()));
                     listData.add(newPost);
                 }
                 adapter.notifyDataSetChanged();
