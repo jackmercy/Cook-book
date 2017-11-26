@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 import group32.android.cookbook.models.Post;
@@ -48,15 +50,18 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context,EditProfileActivity.class);//Thay đổi activity chỗ này
-                i.putExtra("KEY","UID of post");
+                Intent i = new Intent(context,ItemDetailActivity.class);//Thay đổi activity chỗ này
+                //i.putExtra("KEY","UID of post");
                 //sử dụng dòng này khi có UID Post
-//                i.putExtra("KEY",String.valueOf((Post)postData.get(position).getUID()));
+                i.putExtra("UID",String.valueOf((Post)postData.get(position)));
                 context.startActivity(i);
             }
         });
     }
 
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
     //Tạo class exten từ ViewHolder , khai báo các biến trong item_for_list_item.yml
     public class PostHolder extends RecyclerView.ViewHolder{
         TextView txtTitle,txtAuthor,txtRecipe,txtStar,txtStarCounter,txtTotalVotes;
@@ -78,4 +83,6 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     {
         return postData.size();
     }
+
+
 }

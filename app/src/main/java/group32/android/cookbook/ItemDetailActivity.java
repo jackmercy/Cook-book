@@ -1,24 +1,17 @@
 package group32.android.cookbook;
 
-import android.content.ClipData;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-//import com.bumptech.glide.annotation.GlideModule;
-//import com.bumptech.glide.module.AppGlideModule;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,14 +26,16 @@ import java.util.ArrayList;
 import group32.android.cookbook.adapter.CustomCommentArrayAdapter;
 import group32.android.cookbook.models.Comment;
 import group32.android.cookbook.models.ItemDetail;
-import group32.android.cookbook.models.Post;
+
+//import com.bumptech.glide.annotation.GlideModule;
+//import com.bumptech.glide.module.AppGlideModule;
 //import com.bumptech.glide.request.RequestOptions.Error;
 
 
 public class ItemDetailActivity extends AppCompatActivity implements View.OnTouchListener {
 
     //Data variable
-    //public static final String EXTRA_POST_KEY = "post_key";
+    //public static final String EXTRA_POST_KEY = "UID";
 
     private DatabaseReference database;
     private DatabaseReference itemDatabse;

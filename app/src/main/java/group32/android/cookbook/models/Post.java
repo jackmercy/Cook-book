@@ -7,7 +7,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class Post {
-    //public String
+    //public String UID;
     public String author;
     public String title;
     //public Uri image;
@@ -41,48 +41,39 @@ public class Post {
     public void setAuthor(String author) {
         this.author = author;
     }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setRecipe(String recipe) {
+        this.recipe = recipe;
+    }
+    public void setStar(double star) {
+        this.star = star;
+    }
+    public void setStarCounter(int starCounter) {
+        this.starCounter = starCounter;
+    }
+    public void setTotalVotes(int totalVotes) {
+        this.totalVotes = totalVotes;
+    }
 
     public String getAuthor() {
         return author;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getTitle() {
         return title;
     }
-
     public String getRecipe() {
         return recipe;
     }
-
-    public void setRecipe(String recipe) {
-        this.recipe = recipe;
-    }
-
     public double getStar() {
         return  this.getStarCounter()/this.getTotalVotes();
     }
-
-    public void setStar(double star) {
-        this.star = star;
-    }
-
     public double getStarCounter() {
         return starCounter;
     }
-
-    public void setStarCounter(int starCounter) {
-        this.starCounter = starCounter;
-    }
-
     public int getTotalVotes() {
         return totalVotes;
     }
 
-    public void setTotalVotes(int totalVotes) {
-        this.totalVotes = totalVotes;
-    }
 }
