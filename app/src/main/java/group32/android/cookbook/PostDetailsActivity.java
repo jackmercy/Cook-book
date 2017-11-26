@@ -1,5 +1,6 @@
 package group32.android.cookbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,10 +31,10 @@ import group32.android.cookbook.models.User;
 //import com.bumptech.glide.request.RequestOptions.Error;
 
 
-public class ItemDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class PostDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Data variable
-    //public static final String EXTRA_POST_KEY = "UID";
+    public static final String EXTRA_POST_KEY = "post_uid";
 
     private DatabaseReference database;
     private DatabaseReference itemDatabse;
@@ -56,44 +57,48 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_detail);
-
-        // Initialize database
-        database = FirebaseDatabase.getInstance().getReference();
-        itemDatabse = database.child("itemdetail").child("01");
-        imageRef = FirebaseStorage.getInstance().getReference();
+        setContentView(R.layout.activity_post_details);
 
         // Initialize Views
-        ivItemImage = (ImageView) findViewById(R.id.iv_item_image);
-        tvItemContent = (TextView) findViewById(R.id.tv_item_content);
-        tvItemTitle = (TextView) findViewById(R.id.tv_item_title);
-        editComment = (EditText) findViewById(R.id.edit_comment);
-        lvComments = (ListView) findViewById(R.id.lv_comments);
-        ratingBarView = (RatingBar) findViewById(R.id.rating_bar);
-        btnComment = (Button) findViewById(R.id.btn_comment);
+        ivItemImage = findViewById(R.id.iv_item_image);
+        tvItemContent = findViewById(R.id.tv_item_content);
+        tvItemTitle = findViewById(R.id.tv_item_title);
+        editComment = findViewById(R.id.edit_comment);
+        lvComments = findViewById(R.id.lv_comments);
+        ratingBarView = findViewById(R.id.rating_bar);
+        btnComment = findViewById(R.id.btn_comment);
         btnComment.setOnClickListener(this);
 
         //Retrive uid from put extra
-/*        String newString;
+        String newUid;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                newString= null;
+            if (extras == null) {
+                newUid = null;
+                Intent intent = new Intent(PostDetailsActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             } else {
-                newString= extras.getString("KEY");
+                newUid = extras.getString(EXTRA_POST_KEY);
             }
         } else {
-            newString= (String)savedInstanceState.getSerializable("KEY");
-        }*/
+            newUid = (String) savedInstanceState.getSerializable(EXTRA_POST_KEY);
+        }
+
+        // Initialize database
+        database = FirebaseDatabase.getInstance().getReference();
+        assert newUid != null;
+        itemDatabse = database.child("itemdetail").child(newUid);
+        imageRef = FirebaseStorage.getInstance().getReference();
 
         //Data initialize
-        adapter = new CustomCommentArrayAdapter(ItemDetailActivity.this, R.layout.activity_item_custom_comment, arrComments);
+        adapter = new CustomCommentArrayAdapter(PostDetailsActivity.this, R.layout.activity_item_custom_comment, arrComments);
         lvComments.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         //Get a post data
         ValueEventListener itemListener = new ValueEventListener() {
@@ -103,7 +108,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
                 item = dataSnapshot.getValue(ItemDetail.class);
 
                 //Get comment array
-                for (DataSnapshot commentSnapshot: dataSnapshot.child("post-comment").getChildren()){
+                for (DataSnapshot commentSnapshot : dataSnapshot.child("post-comment").getChildren()) {
                     Comment newComment = commentSnapshot.getValue(Comment.class);
                     arrComments.add(newComment);
                 }
@@ -114,7 +119,7 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
                 childImageRef = imageRef.child(item.getDataImage());
 
                 //Data processing
-                Glide.with(ItemDetailActivity.this)
+                Glide.with(PostDetailsActivity.this)
                         .using(new FirebaseImageLoader())
                         .load(childImageRef)
                         .into(ivItemImage);
@@ -131,18 +136,17 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         float currentStar = item.getRatingNumber();
         float star;
         star = ratingBarView.getRating();
 
         //If not rated
-        if (currentStar >= 0){
-        item.setRatingNumber((ratingBarView.getRating() + currentStar)/2);
-        }
-        else {
-        item.setRatingNumber(ratingBarView.getNumStars());
+        if (currentStar >= 0) {
+            item.setRatingNumber((ratingBarView.getRating() + currentStar) / 2);
+        } else {
+            item.setRatingNumber(ratingBarView.getNumStars());
         }
 
         ratingDatabase = itemDatabse.child("ratingNumber");
@@ -151,14 +155,14 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         //Back to previous activity
         finish();
     }
 
     @Override
-    public void onClick (View view){
+    public void onClick(View view) {
         User user = new User("Alan", "alannguyen@gmail.com");
         Comment newComment = new Comment();
         newComment.setAuthor(user.displayName);
@@ -167,4 +171,16 @@ public class ItemDetailActivity extends AppCompatActivity implements View.OnClic
         editComment.getText().clear();
         itemDatabse.child("post-comment").push().setValue(newComment);
     }
+
+    /*@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch(keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                Intent intent = new Intent(PostDetailsActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }*/
 }

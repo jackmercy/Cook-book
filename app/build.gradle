@@ -26,18 +26,23 @@ repositories {
 }
 dependencies {
 
+    //noinspection GradleDependency
     implementation 'com.google.firebase:firebase-database:11.0.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //noinspection GradleDependency
     compile 'com.google.firebase:firebase-auth:11.0.4'
+    //noinspection GradleDependency
     compile 'com.google.firebase:firebase-storage:11.0.4'
     compile 'com.android.support:design:26.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:26.1.0'
+    //noinspection GradleDependency
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     compile 'me.grantland:autofittextview:0.2.1'

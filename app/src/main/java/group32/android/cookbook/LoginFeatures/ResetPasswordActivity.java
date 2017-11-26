@@ -1,4 +1,4 @@
-package group32.android.cookbook;
+package group32.android.cookbook.LoginFeatures;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import group32.android.cookbook.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
