@@ -26,4 +26,12 @@ public class Comment {
     public String getMessage() {
         return message;
     }
+
+    public void setAuthor(String displayName){
+        this.author = displayName;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
+    }
 }
