@@ -6,10 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -26,6 +31,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     private List<Post> postData;
     private Context context;
     public static final String EXTRA_POST_KEY = "post_uid";
+    public StorageReference imageRef;
     //Khởi tạo constructor để gọi từ HomeActivity
     public CustomListItemRecyclerAdapter(Context context, List<Post> postData)
     {
@@ -44,6 +50,12 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     @Override
     public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
+        imageRef = FirebaseStorage.getInstance().getReference().child(postData.get(position).getImage());
+        Glide.with(context)
+                .using(new FirebaseImageLoader())
+                .load(imageRef)
+                .into(holder.imageView);
+
         holder.txtTitle.setText(((Post)postData.get(position)).getTitle());
         holder.txtAuthor.setText(((Post)postData.get(position)).getAuthor());
         holder.txtRecipe.setText(((Post)postData.get(position)).getRecipe());
@@ -56,9 +68,9 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
                 Intent i = new Intent(context,PostDetailsActivity.class);//Thay đổi activity chỗ này
                 //i.putExtra("KEY","UID of post");
                 //sử dụng dòng này khi có UID Post
-                String Uid = postData.get(position).getUid();
-                if(Uid != null){
-                    i.putExtra(EXTRA_POST_KEY,Uid);
+                String post_uid = postData.get(position).getUid();
+                if(post_uid != null){
+                    i.putExtra(EXTRA_POST_KEY, post_uid);
                     context.startActivity(i);
                 }
                 else
@@ -76,6 +88,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     //Tạo class exten từ ViewHolder , khai báo các biến trong item_for_list_posts.yml
     public class PostHolder extends RecyclerView.ViewHolder{
         TextView txtTitle,txtAuthor,txtRecipe,txtStar,txtStarCounter,txtTotalVotes;
+        ImageView imageView;
         View itemview;
         public PostHolder(View view){
             super(view);
@@ -83,6 +96,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
             txtAuthor =  view.findViewById(R.id.txtAuthor);
             txtRecipe =  view.findViewById(R.id.txtRecipe);
             txtStar =  view.findViewById(R.id.txtStar);
+            imageView = view.findViewById(R.id.iv_item_image);
 //            txtStarCounter =  view.findViewById(R.id.txtStarCounter);
             txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
