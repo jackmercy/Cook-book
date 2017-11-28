@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "80327170921-1tkiau4mbtpuflrk15951u2h8d5rl3n8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "group32.android.cookbook",
+            "certificate_hash": "18269e269738d5678c768e0d661615cba882f056"
+          }
+        },
+        {
           "client_id": "80327170921-24k96pb78nc4g1cirva899099aoh8inl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
