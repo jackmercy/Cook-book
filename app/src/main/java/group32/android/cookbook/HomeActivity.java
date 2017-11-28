@@ -145,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.new_post_btn:
                         //navigate to new post activity
+                        startActivity(new Intent(HomeActivity.this, NewPostActivity.class));
                         return true;
                     case R.id.options_menu_edit_btn:
                         startActivity(new Intent(HomeActivity.this, EditProfileActivity.class));
