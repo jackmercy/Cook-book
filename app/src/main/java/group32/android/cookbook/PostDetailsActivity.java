@@ -70,22 +70,6 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         userRef = dbRef.child("users").child(UserID);
         Log.d("POSE DETAILS","user id " + UserID + userRef);
 
-        /*ValueEventListener UserInformation = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get User object once
-                _user = dataSnapshot.getValue(User.class);
-                Log.d("POST DETAILS","USER: "+ dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("User debug", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-        userRef.addListenerForSingleValueEvent(UserInformation);*/
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
