@@ -19,7 +19,6 @@ public class Post {
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
-
     public Post(String author, String title, String recipe) {
         this.uid = null;
         this.author = author;
