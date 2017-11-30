@@ -71,6 +71,8 @@ public class Post {
         return this.recipe;
     }
     public double getStar() {
+        if(this.getTotalVotes() == 0)
+            return 0;
         return  this.getStarCounter()/this.getTotalVotes();
     }
     public double getStarCounter() {
