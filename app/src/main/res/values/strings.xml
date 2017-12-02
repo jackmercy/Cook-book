@@ -30,7 +30,13 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
 
+    <string name="new_post">New Post</string>
+    <string name="done">Done</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_recipe">Recipe</string>
     //Facebook
     <string name="facebook_app_id">190781848160248</string>
     <string name="fb_login_protocol_scheme">fb190781848160248</string>
+
 </resources>

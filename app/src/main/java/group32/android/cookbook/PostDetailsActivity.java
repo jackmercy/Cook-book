@@ -143,7 +143,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
                 tvItemTitle.setText(postDetail.getTitle());
                 tvItemContent.setText(postDetail.getRecipe());
                 //Data processing
-                childImageRef = imageRef.child(postDetail.getImage());
+                childImageRef = imageRef.child("images/" + postDetail.getImage());
                 Glide.with(PostDetailsActivity.this)
                         .using(new FirebaseImageLoader())
                         .load(childImageRef)

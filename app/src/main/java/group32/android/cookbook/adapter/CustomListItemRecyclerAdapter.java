@@ -50,7 +50,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     @Override
     public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
-        imageRef = FirebaseStorage.getInstance().getReference().child(postData.get(position).getImage());
+        imageRef = FirebaseStorage.getInstance().getReference().child("images/" + postData.get(position).getImage());
         Glide.with(context)
                 .using(new FirebaseImageLoader())
                 .load(imageRef)
