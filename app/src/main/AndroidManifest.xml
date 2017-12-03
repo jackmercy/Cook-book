@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="group32.android.cookbook">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-        <activity android:name=".EditProfileActivity">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".SampleActivity"/>
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".LoginFeatures.LoginActivity" />
+        <activity android:name=".LoginFeatures.SignupActivity" />
+        <activity android:name=".LoginFeatures.ResetPasswordActivity" />
+        <activity android:name=".SampleActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PostDetailsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".NewPostActivity"></activity>
     </application>
-
 
 </manifest>

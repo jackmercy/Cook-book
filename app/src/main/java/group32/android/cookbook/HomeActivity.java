@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import group32.android.cookbook.LoginFeatures.LoginActivity;
+import group32.android.cookbook.adapter.CustomListItemRecyclerAdapter;
 import group32.android.cookbook.models.Post;
 
 
@@ -78,15 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         };
-
-        /*progressBar =  findViewById(R.id.progressBar);
-
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }*/
-
     }
-
 
 
     @Override
@@ -108,6 +102,9 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d("Home Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
+                    assert newPost != null;
+                    newPost.setUid(postSnapshot.getKey());
+                    Log.d("UID POST", String.format("Uid is %s", newPost.getUid()));
                     listData.add(newPost);
                 }
                 adapter.notifyDataSetChanged();
@@ -146,14 +143,18 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.new_post_btn:
+                        //navigate to new post activity
+                        startActivity(new Intent(HomeActivity.this, NewPostActivity.class));
+                        return true;
                     case R.id.options_menu_edit_btn:
                         startActivity(new Intent(HomeActivity.this, EditProfileActivity.class));
-                        finish();
                         //Toast.makeText(getApplicationContext(), "edit clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.id_set:
                         signOut();
                         Toast.makeText(getApplicationContext(), "nope", Toast.LENGTH_SHORT).show();
+                        finish();
                         return true;
                     default:
                         return false;

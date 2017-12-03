@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/new_post_btn"
+        android:title="New Post"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/options_menu_edit_btn"
         android:title="Edit profile"
         app:showAsAction="never" />
