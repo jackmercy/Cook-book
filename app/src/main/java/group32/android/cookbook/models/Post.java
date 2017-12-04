@@ -1,5 +1,7 @@
 package group32.android.cookbook.models;
 
+import android.net.Uri;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -10,7 +12,7 @@ public class Post {
     private String uid;
     private String author;
     private String title;
-    //public Uri image;
+    private String image;
     private String recipe;
     private double starCounter; // 1 user vote X star=> StarCount += X;
     private int totalVotes; // 1 user vote => totalVotes++;
@@ -19,10 +21,12 @@ public class Post {
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
-    public Post(String author, String title, String recipe) {
+
+    public Post(String author, String title, String recipe, String image) {
         this.uid = null;
         this.author = author;
         this.title = title;
+        this.image = image;
         this.recipe = recipe;
         this.starCounter = 0;
         this.totalVotes = 0;
@@ -33,6 +37,7 @@ public class Post {
         this.uid = null;
         this.author = newPost.getAuthor();
         this.title = newPost.getTitle();
+        this.image = newPost.getImage();
         this.recipe = newPost.getRecipe();
         this.starCounter = newPost.getStarCounter();
         this.totalVotes = newPost.getTotalVotes();
@@ -49,14 +54,17 @@ public class Post {
     public void setRecipe(String recipe) {
         this.recipe = recipe;
     }
-    public void setStar(double star) {
-        this.star = star;
+    public void setStar() {
+        this.star = this.getStarCounter()/this.getTotalVotes();
     }
-    public void setStarCounter(int starCounter) {
+    public void setStarCounter(double starCounter) {
         this.starCounter = starCounter;
     }
     public void setTotalVotes(int totalVotes) {
         this.totalVotes = totalVotes;
+    }
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUid() {return this.uid;}
@@ -70,15 +78,16 @@ public class Post {
         return this.recipe;
     }
     public double getStar() {
-        if(this.getTotalVotes() == 0)
-            return 0;
-        return  this.getStarCounter()/this.getTotalVotes();
+        return  this.star;
     }
     public double getStarCounter() {
         return this.starCounter;
     }
     public int getTotalVotes() {
         return this.totalVotes;
+    }
+    public String getImage() {
+        return this.image;
     }
 
 }
