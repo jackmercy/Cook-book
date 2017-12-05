@@ -32,7 +32,7 @@
 
     <string name="new_post">New Post</string>
     <string name="done">Done</string>
-    <string name="upload_image">Upload Image</string>
+    <string name="upload_image">Change Image</string>
     <string name="hint_title">Title</string>
     <string name="hint_recipe">Recipe</string>
     //Facebook

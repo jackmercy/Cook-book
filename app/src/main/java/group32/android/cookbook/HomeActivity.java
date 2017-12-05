@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
+        Log.d("State HomeActivity","onResume");
     }
 
     @Override
@@ -162,7 +163,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //sign out method
     public void signOut() {

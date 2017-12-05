@@ -47,7 +47,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <Button
-        android:id="@+id/editpost_btn_upload"
+        android:id="@+id/editpost_btn_change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/editpost_btn_done"
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@color/color_text"
-        android:layout_below="@+id/editpost_btn_upload"
+        android:layout_below="@+id/editpost_btn_change"
         android:id="@+id/editpost_hint_title"
         >
         <EditText

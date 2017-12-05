@@ -18,6 +18,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import group32.android.cookbook.EditPostActivity;
+import group32.android.cookbook.HomeActivity;
 import group32.android.cookbook.PostDetailsActivity;
 import group32.android.cookbook.R;
 import group32.android.cookbook.models.Post;
@@ -48,7 +50,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     }
 
     @Override
-    public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
+    public void onBindViewHolder(final CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
         imageRef = FirebaseStorage.getInstance().getReference().child("images/" + postData.get(position).getImage());
         Glide.with(context)
