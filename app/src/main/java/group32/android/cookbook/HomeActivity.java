@@ -156,6 +156,10 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "nope", Toast.LENGTH_SHORT).show();
                         finish();
                         return true;
+                    case R.id.my_post:
+                        startActivity(new Intent(HomeActivity.this, MyPostActivity
+                                .class));
+                        return true;
                     default:
                         return false;
                 }

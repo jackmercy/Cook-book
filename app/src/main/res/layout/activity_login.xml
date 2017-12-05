@@ -76,15 +76,9 @@
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_loginfacebook"
-            android:layout_width="354dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" />
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_logingoogle"
-            android:layout_width="364dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="15dp"></com.google.android.gms.common.SignInButton>
+            android:layout_marginTop="20dp"/>
 
         <Button
             android:id="@+id/btn_reset_password"
