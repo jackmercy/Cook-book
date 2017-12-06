@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CookBook.iml" filepath="$PROJECT_DIR$/CookBook.iml" />
+      <module fileurl="file://E:\Document\UIT\android\cookbook\CookBook.iml" filepath="E:\Document\UIT\android\cookbook\CookBook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\Document\UIT\android\cookbook\app\app.iml" filepath="E:\Document\UIT\android\cookbook\app\app.iml" />
     </modules>
   </component>
 </project>

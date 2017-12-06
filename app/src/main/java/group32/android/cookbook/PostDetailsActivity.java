@@ -165,13 +165,13 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         super.onPause();
         double star = (double) ratingBarView.getRating();
 
-        postDetail.setStarCounter(postDetail.getStarCounter() + star);
+        /*postDetail.setStarCounter(postDetail.getStarCounter() + star);
         postDetail.setTotalVotes(postDetail.getTotalVotes() + 1);
         postDetail.setStar();
 
         itemDatabse.child("star").setValue(postDetail.getStar());
         itemDatabse.child("starCounter").setValue(postDetail.getStarCounter());
-        itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());
+        itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());*/
 
 
     }
