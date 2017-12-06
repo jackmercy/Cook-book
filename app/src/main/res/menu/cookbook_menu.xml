@@ -7,6 +7,11 @@
         android:title="New Post"
         app:showAsAction="never" />
     <item
+        android:title="My Post"
+        android:id="@+id/my_post"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/options_menu_edit_btn"
         android:title="Edit profile"
         app:showAsAction="never" />
