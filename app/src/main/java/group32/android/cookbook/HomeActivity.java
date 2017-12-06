@@ -137,13 +137,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get post information
+
                 Log.d("Home Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
                     assert newPost != null;
                     newPost.setUid(postSnapshot.getKey());
-                    assert listData != null;
-                    assert mPostsReference != null;
                     Log.d("UID POST", String.format("Uid is %s", newPost));
                     listData.add(newPost);
                 }
