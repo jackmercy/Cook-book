@@ -34,7 +34,8 @@ import group32.android.cookbook.models.User;
 //import com.bumptech.glide.request.RequestOptions.Error;
 
 
-public class PostDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class PostDetailsActivity extends AppCompatActivity
+        implements View.OnClickListener, RatingBar.OnRatingBarChangeListener {
 
     //Data variable
     public static final String EXTRA_POST_KEY = "post_uid";
@@ -53,6 +54,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
     private CustomCommentArrayAdapter adapter;
     private User _user;
     private  String newPostUid;
+    private boolean ratingChanged;
 
     private ImageView ivItemImage;
     private TextView tvItemContent, tvItemTitle;
@@ -95,6 +97,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         ratingBarView = findViewById(R.id.rating_bar);
         btnComment = findViewById(R.id.btn_comment);
         btnComment.setOnClickListener(this);
+        ratingBarView.setOnRatingBarChangeListener(this);
 
         //Retrive uid from put extra
 
@@ -119,6 +122,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         imageRef = FirebaseStorage.getInstance().getReference();
 
         //Data initialize
+        ratingChanged = false;
         adapter = new CustomCommentArrayAdapter(PostDetailsActivity.this, R.layout.activity_item_custom_comment, arrComments);
         lvComments.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -156,32 +160,33 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
         };
-        itemDatabse.addValueEventListener(itemListener);
+        itemDatabse.addListenerForSingleValueEvent(itemListener);
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        double star = (double) ratingBarView.getRating();
 
-        /*postDetail.setStarCounter(postDetail.getStarCounter() + star);
+        if (ratingChanged) {
+            double star = (double) ratingBarView.getRating();
+
+        postDetail.setStarCounter(postDetail.getStarCounter() + star);
         postDetail.setTotalVotes(postDetail.getTotalVotes() + 1);
         postDetail.setStar();
 
         itemDatabse.child("star").setValue(postDetail.getStar());
         itemDatabse.child("starCounter").setValue(postDetail.getStarCounter());
-        itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());*/
-
-
+        itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());
+        }
     }
 
-    @Override
+/*    @Override
     public void onBackPressed() {
         super.onBackPressed();
         //Back to previous activity
         finish();
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
@@ -199,6 +204,13 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         }
         //Log.d("POST DETAILS","USER: "+ _user.getDisplayName() + " " + _user.getEmail());
         //User user = new User("Alan", "alannguyen@gmail.com");
+    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        if (fromUser) {
+            ratingChanged = true;
+        }
     }
 
     /*@Override
