@@ -146,6 +146,7 @@ public class PostDetailsActivity extends AppCompatActivity
                 // Assign data into view
                 tvItemTitle.setText(postDetail.getTitle());
                 tvItemContent.setText(postDetail.getRecipe());
+                ratingBarView.setRating((float) postDetail.getStar());
                 //Data processing
                 childImageRef = imageRef.child("images/" + postDetail.getImage());
                 Glide.with(PostDetailsActivity.this)
