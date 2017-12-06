@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import group32.android.cookbook.adapter.CustomCommentArrayAdapter;
 import group32.android.cookbook.models.Comment;
 import group32.android.cookbook.models.ItemDetail;
+import group32.android.cookbook.models.Post;
 import group32.android.cookbook.models.User;
 //import com.bumptech.glide.request.RequestOptions.Error;
 
@@ -47,9 +48,11 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
     private DatabaseReference userRef;
     private DatabaseReference dbRef;
     private ItemDetail item = new ItemDetail();
+    private Post postDetail = new Post();
     private ArrayList<Comment> arrComments = new ArrayList<Comment>();
     private CustomCommentArrayAdapter adapter;
     private User _user;
+    private  String newPostUid;
 
     private ImageView ivItemImage;
     private TextView tvItemContent, tvItemTitle;
@@ -94,7 +97,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
         btnComment.setOnClickListener(this);
 
         //Retrive uid from put extra
-        String newPostUid;
+
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
@@ -129,7 +132,7 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get ItemDetail object and use the values to update the UI
-                item = dataSnapshot.getValue(ItemDetail.class);
+                postDetail = dataSnapshot.getValue(Post.class);
 
                 //Get comment array
                 for (DataSnapshot commentSnapshot : dataSnapshot.child("post-comment").getChildren()) {
@@ -137,12 +140,10 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
                     arrComments.add(newComment);
                 }
                 // Assign data into view
-                tvItemTitle.setText(item.getDataTitle());
-                tvItemContent.setText(item.getDataContent());
-                ratingBarView.setRating(item.getRatingNumber());
-                childImageRef = imageRef.child(item.getDataImage());
-
+                tvItemTitle.setText(postDetail.getTitle());
+                tvItemContent.setText(postDetail.getRecipe());
                 //Data processing
+                childImageRef = imageRef.child("images/" + postDetail.getImage());
                 Glide.with(PostDetailsActivity.this)
                         .using(new FirebaseImageLoader())
                         .load(childImageRef)
@@ -160,21 +161,18 @@ public class PostDetailsActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        float currentStar = item.getRatingNumber();
-        float star;
-        star = ratingBarView.getRating();
+    protected void onPause() {
+        super.onPause();
+        double star = (double) ratingBarView.getRating();
 
-        //If not rated
-        if (currentStar >= 0) {
-            item.setRatingNumber((ratingBarView.getRating() + currentStar) / 2);
-        } else {
-            item.setRatingNumber(ratingBarView.getNumStars());
-        }
+        /*postDetail.setStarCounter(postDetail.getStarCounter() + star);
+        postDetail.setTotalVotes(postDetail.getTotalVotes() + 1);
+        postDetail.setStar();
 
-        ratingDatabase = itemDatabse.child("ratingNumber");
-        ratingDatabase.setValue(item.getRatingNumber());
+        itemDatabse.child("star").setValue(postDetail.getStar());
+        itemDatabse.child("starCounter").setValue(postDetail.getStarCounter());
+        itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());*/
+
 
     }
 

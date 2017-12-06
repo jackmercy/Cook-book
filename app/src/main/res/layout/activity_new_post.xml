@@ -92,5 +92,4 @@
             android:inputType="textPersonName"
             android:hint="Recipe"/>
     </android.support.design.widget.TextInputLayout>
-
 </RelativeLayout>

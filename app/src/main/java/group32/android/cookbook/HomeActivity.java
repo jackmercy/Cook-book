@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomListItemRecyclerAdapter adapter;
     private LinearLayoutManager layoutManager;
-    private List<Post> listData = new ArrayList();
+    private List<Post> listData = new ArrayList<>();
     //public ProgressBar progressBar;
     private DatabaseReference mPostsReference;
     private DatabaseReference root_db;
@@ -58,8 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(1);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CustomListItemRecyclerAdapter(this, listData);
-        recyclerView.setAdapter(adapter);
+
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
         mPostsReference = root_db.child("posts");
@@ -87,24 +86,64 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
+
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        listData = new ArrayList<>();
+        adapter = new CustomListItemRecyclerAdapter(this, listData);
+        recyclerView.setAdapter(adapter);
+        //activity instance
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(1);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Initialize Database
+        root_db = FirebaseDatabase.getInstance().getReference();
+        mPostsReference = root_db.child("posts");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        listData = new ArrayList<>();
+        //activity instance
+        recyclerView = findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(1);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Initialize Database
+        root_db = FirebaseDatabase.getInstance().getReference();
+        mPostsReference = root_db.child("posts");
     }
 
     @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
+
         //Retrieving basic data (1 key)
         // Add value event listener to the post
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get post information
+
                 Log.d("Home Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
                     assert newPost != null;
                     newPost.setUid(postSnapshot.getKey());
-                    Log.d("UID POST", String.format("Uid is %s", newPost.getUid()));
+                    Log.d("UID POST", String.format("Uid is %s", newPost));
                     listData.add(newPost);
                 }
                 adapter.notifyDataSetChanged();
@@ -116,6 +155,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
         mPostsReference.addValueEventListener(valueEventListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
