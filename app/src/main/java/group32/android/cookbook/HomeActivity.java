@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,6 +105,40 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
         mPostsReference = root_db.child("posts");
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot postSnapshot, String s) {
+                Post newPost = postSnapshot.getValue(Post.class);
+                assert newPost != null;
+                newPost.setUid(postSnapshot.getKey());
+                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
+                listData.add(newPost);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot postSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot postSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot postSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Home activity", "Post: onCancelled", databaseError.toException());
+                Toast.makeText(getApplicationContext(), "Failed to load posts.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        mPostsReference.addChildEventListener(childEventListener);
     }
 
     @Override
@@ -154,7 +189,8 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
         };
-        mPostsReference.addValueEventListener(valueEventListener);
+        //mPostsReference.addListenerForSingleValueEvent(valueEventListener);
+        //DatabaseReference ListPostRef_forChild = mPostsReference;
     }
 
     @Override
