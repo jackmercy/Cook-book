@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,18 +51,19 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     @Override
     public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
+        Post post = postData.get(position);
         imageRef = FirebaseStorage.getInstance().getReference().child("images/" + postData.get(position).getImage());
         Glide.with(context)
                 .using(new FirebaseImageLoader())
                 .load(imageRef)
                 .into(holder.imageView);
 
-        holder.txtTitle.setText(((Post)postData.get(position)).getTitle());
-        holder.txtAuthor.setText(((Post)postData.get(position)).getAuthor());
-        holder.txtRecipe.setText(((Post)postData.get(position)).getRecipe());
-        holder.txtStar.setText(String.valueOf(((Post)postData.get(position)).getStar()));
-//        holder.txtStarCounter.setText(String.valueOf(((Post)postData.get(position)).getStarCounter()));
-        holder.txtTotalVotes.setText(String.valueOf(((Post)postData.get(position)).getTotalVotes()));
+        holder.txtTitle.setText(post.getTitle());
+        holder.txtAuthor.setText(post.getAuthor());
+        holder.txtRecipe.setText(post.getRecipe());
+        holder.ratingBar.setRating((float) post.getStar());
+
+        holder.txtTotalVotes.setText(String.valueOf(post.getTotalVotes()));
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,21 +87,22 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
+
     //Tạo class exten từ ViewHolder , khai báo các biến trong item_for_list_posts.yml
     public class PostHolder extends RecyclerView.ViewHolder{
-        TextView txtTitle,txtAuthor,txtRecipe,txtStar,txtStarCounter,txtTotalVotes;
+        TextView txtTitle, txtAuthor, txtRecipe,txtTotalVotes;
         ImageView imageView;
         View itemview;
+        RatingBar ratingBar;
         public PostHolder(View view){
             super(view);
             txtTitle =  view.findViewById(R.id.txtTitle);
             txtAuthor =  view.findViewById(R.id.txtAuthor);
             txtRecipe =  view.findViewById(R.id.txtRecipe);
-            txtStar =  view.findViewById(R.id.txtStar);
             imageView = view.findViewById(R.id.iv_item_image);
-//            txtStarCounter =  view.findViewById(R.id.txtStarCounter);
             txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
+            ratingBar = view.findViewById(R.id.rating_bar);
         }
     }
 
