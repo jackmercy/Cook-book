@@ -22,7 +22,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +117,13 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot postSnapshot, String s) {
-
+                Post newPost = postSnapshot.getValue(Post.class);
+                assert newPost != null;
+                newPost.setUid(postSnapshot.getKey());
+                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
+                int index = getIndexListData(listData, newPost.getUid());
+                listData.set(index, newPost);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -142,33 +147,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //get firebase auth instance
-        auth = FirebaseAuth.getInstance();
-        listData = new ArrayList<>();
-        //activity instance
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(1);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // Initialize Database
-        root_db = FirebaseDatabase.getInstance().getReference();
-        mPostsReference = root_db.child("posts");
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
 
         //Retrieving basic data (1 key)
         // Add value event listener to the post
-        ValueEventListener valueEventListener = new ValueEventListener() {
+        /*ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get post information
@@ -189,8 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
         };
-        //mPostsReference.addListenerForSingleValueEvent(valueEventListener);
-        //DatabaseReference ListPostRef_forChild = mPostsReference;
+        mPostsReference.addListenerForSingleValueEvent(valueEventListener);*/
     }
 
     @Override
@@ -255,6 +239,16 @@ public class HomeActivity extends AppCompatActivity {
 
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    private int getIndexListData(List<Post> listData, String UID) {
+        for (int i = 0; i < listData.size(); i++) {
+            Post post = listData.get(i);
+            if( UID.equals(post.getUid()) ) {
+                return i;
+            }
+        }
+        return 0;
     }
 
 }
