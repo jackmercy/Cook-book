@@ -21,10 +21,10 @@ import group32.android.cookbook.LoginFeatures.SignupActivity;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    public Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
-            changeEmail, changePassword, sendEmail, remove, signOut;
+    public Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnChangeUsername,
+            changeEmail, changePassword, sendEmail, changeUsername, signOut;
 
-    public EditText oldEmail, newEmail, password, newPassword;
+    public EditText oldEmail, newEmail, newUsername, newPassword;
     public ProgressBar progressBar;
     public FirebaseAuth.AuthStateListener authListener;
     public FirebaseAuth auth;
@@ -60,26 +60,27 @@ public class EditProfileActivity extends AppCompatActivity {
         btnChangeEmail =  findViewById(R.id.change_email_button);
         btnChangePassword =  findViewById(R.id.change_password_button);
         btnSendResetEmail =  findViewById(R.id.sending_pass_reset_button);
-        btnRemoveUser =  findViewById(R.id.remove_user_button);
+        btnChangeUsername =  findViewById(R.id.change_username_button);
+        changeUsername =  findViewById(R.id.changeUsername);
         changeEmail =  findViewById(R.id.changeEmail);
         changePassword =  findViewById(R.id.changePass);
         sendEmail =  findViewById(R.id.send);
-        remove =  findViewById(R.id.remove);
+        changeUsername =  findViewById(R.id.changeUsername);
         signOut =  findViewById(R.id.sign_out);
 
         oldEmail =  findViewById(R.id.old_email);
         newEmail =  findViewById(R.id.new_email);
-        password =  findViewById(R.id.password);
+        newUsername =  findViewById(R.id.new_username);
         newPassword =  findViewById(R.id.newPassword);
 
         oldEmail.setVisibility(View.GONE);
         newEmail.setVisibility(View.GONE);
-        password.setVisibility(View.GONE);
+        newUsername.setVisibility(View.GONE);
         newPassword.setVisibility(View.GONE);
         changeEmail.setVisibility(View.GONE);
         changePassword.setVisibility(View.GONE);
         sendEmail.setVisibility(View.GONE);
-        remove.setVisibility(View.GONE);
+        changeUsername.setVisibility(View.GONE);
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -92,12 +93,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.VISIBLE);
-                password.setVisibility(View.GONE);
+                newUsername.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.VISIBLE);
                 changePassword.setVisibility(View.GONE);
                 sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
+                changeUsername.setVisibility(View.GONE);
             }
         });
 
@@ -132,12 +133,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 oldEmail.setVisibility(View.GONE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
+                newUsername.setVisibility(View.GONE);
                 newPassword.setVisibility(View.VISIBLE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.VISIBLE);
                 sendEmail.setVisibility(View.GONE);
-                remove.setVisibility(View.GONE);
+                changeUsername.setVisibility(View.GONE);
             }
         });
 
@@ -177,12 +178,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 oldEmail.setVisibility(View.VISIBLE);
                 newEmail.setVisibility(View.GONE);
-                password.setVisibility(View.GONE);
+                newUsername.setVisibility(View.GONE);
                 newPassword.setVisibility(View.GONE);
                 changeEmail.setVisibility(View.GONE);
                 changePassword.setVisibility(View.GONE);
                 sendEmail.setVisibility(View.VISIBLE);
-                remove.setVisibility(View.GONE);
+                changeUsername.setVisibility(View.GONE);
             }
         });
 
@@ -211,26 +212,41 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+        btnChangeUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                oldEmail.setVisibility(View.GONE);
+                newEmail.setVisibility(View.GONE);
+                newUsername.setVisibility(View.VISIBLE);
+                newPassword.setVisibility(View.GONE);
+                changeEmail.setVisibility(View.GONE);
+                changePassword.setVisibility(View.GONE);
+                sendEmail.setVisibility(View.GONE);
+                changeUsername.setVisibility(View.VISIBLE);
+            }
+        });
+
+        changeUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                if (user != null) {
-                    user.delete()
+                if (!newUsername.getText().toString().trim().equals("")) {
+                    auth.sendPasswordResetEmail(newUsername.getText().toString().trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(EditProfileActivity.this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(EditProfileActivity.this, SignupActivity.class));
-                                        finish();
+                                        Toast.makeText(EditProfileActivity.this, "Username is updated!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
-                                        Toast.makeText(EditProfileActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditProfileActivity.this, "Failed to update username!", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
+                } else {
+                    newUsername.setError("Enter New Username");
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
@@ -241,6 +257,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
     }
 
     //sign out method

@@ -63,8 +63,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
         holder.txtTitle.setText(post.getTitle());
         holder.txtAuthor.setText(post.getAuthor());
         holder.txtRecipe.setText(post.getRecipe());
-        holder.ratingBar.setRating((float) post.getStar());
-
+        holder.txtStar.setText(String.valueOf(((Post)postData.get(position)).getStar()));
         holder.txtTotalVotes.setText(String.valueOf(post.getTotalVotes()));
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,10 +91,9 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
 
     //Tạo class exten từ ViewHolder , khai báo các biến trong item_for_list_posts.yml
     public class PostHolder extends RecyclerView.ViewHolder{
-        TextView txtTitle, txtAuthor, txtRecipe,txtTotalVotes;
+        TextView txtTitle, txtAuthor, txtRecipe,txtTotalVotes,txtStar;
         ImageView imageView;
         View itemview;
-        RatingBar ratingBar;
         public PostHolder(View view){
             super(view);
             txtTitle =  view.findViewById(R.id.txtTitle);
@@ -104,7 +102,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
             imageView = view.findViewById(R.id.iv_item_image);
             txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
-            ratingBar = view.findViewById(R.id.rating_bar);
+            txtStar =  view.findViewById(R.id.txtStar);
         }
     }
 
