@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,22 +30,27 @@ import group32.android.cookbook.LoginFeatures.LoginActivity;
 import group32.android.cookbook.adapter.CustomListItemRecyclerAdapter;
 import group32.android.cookbook.models.Post;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class HomeActivity extends AppCompatActivity {
+/**
+ * Created by trung on 12/3/2017.
+ */
+
+public class MyPostActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomListItemRecyclerAdapter adapter;
     private LinearLayoutManager layoutManager;
-    private List<Post> listData = new ArrayList<>();
+    private List<Post> listData = new ArrayList();
     //public ProgressBar progressBar;
     private DatabaseReference mPostsReference;
     private DatabaseReference root_db;
-    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_my_post);
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,17 +59,18 @@ public class HomeActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         //activity instance
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewPost);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(1);
         recyclerView.setLayoutManager(layoutManager);
-
+        adapter = new CustomListItemRecyclerAdapter(this, listData);
+        recyclerView.setAdapter(adapter);
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
-        mPostsReference = root_db.child("posts");
-
-        //get current user
-        //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        mPostsReference = root_db.child("posts");
+        mPostsReference = root_db.child("users").child(getUid()).child("user-posts");
+//        get current user
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -74,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    startActivity(new Intent(MyPostActivity.this, LoginActivity.class));
                     finish();
                 }
             }
@@ -86,83 +92,24 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //get firebase auth instance
-        auth = FirebaseAuth.getInstance();
-        listData = new ArrayList<>();
-        adapter = new CustomListItemRecyclerAdapter(this, listData);
-        recyclerView.setAdapter(adapter);
-        //activity instance
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(1);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // Initialize Database
-        root_db = FirebaseDatabase.getInstance().getReference();
-        mPostsReference = root_db.child("posts");
-        ChildEventListener childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot postSnapshot, String s) {
-                Post newPost = postSnapshot.getValue(Post.class);
-                assert newPost != null;
-                newPost.setUid(postSnapshot.getKey());
-                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
-                listData.add(newPost);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot postSnapshot, String s) {
-                Post newPost = postSnapshot.getValue(Post.class);
-                assert newPost != null;
-                newPost.setUid(postSnapshot.getKey());
-                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
-                int index = getIndexListData(listData, newPost.getUid());
-                listData.set(index, newPost);
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot postSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot postSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Home activity", "Post: onCancelled", databaseError.toException());
-                Toast.makeText(getApplicationContext(), "Failed to load posts.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
-        mPostsReference.addChildEventListener(childEventListener);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
-
         //Retrieving basic data (1 key)
         // Add value event listener to the post
-        /*ValueEventListener valueEventListener = new ValueEventListener() {
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get post information
-
-                Log.d("Home Activity", "Post details: ");
+                Log.d("My Post Activity", "Post details: ");
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Post newPost = postSnapshot.getValue(Post.class);
                     assert newPost != null;
                     newPost.setUid(postSnapshot.getKey());
-                    Log.d("UID POST", String.format("Uid is %s", newPost));
+                    Log.d("UID POST", String.format("Uid is %s", newPost.getUid()));
                     listData.add(newPost);
                 }
                 adapter.notifyDataSetChanged();
@@ -173,12 +120,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
             }
         };
-        mPostsReference.addListenerForSingleValueEvent(valueEventListener);*/
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+        mPostsReference.addValueEventListener(valueEventListener);
     }
 
     @Override
@@ -208,10 +150,10 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.new_post_btn:
                         //navigate to new post activity
-                        startActivity(new Intent(HomeActivity.this, NewPostActivity.class));
+                        startActivity(new Intent(MyPostActivity.this, NewPostActivity.class));
                         return true;
                     case R.id.options_menu_edit_btn:
-                        startActivity(new Intent(HomeActivity.this, EditProfileActivity.class));
+                        startActivity(new Intent(MyPostActivity.this, EditProfileActivity.class));
                         //Toast.makeText(getApplicationContext(), "edit clicked", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.id_set:
@@ -220,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.my_post:
-                        startActivity(new Intent(HomeActivity.this, MyPostActivity
+                        startActivity(new Intent(MyPostActivity.this, MyPostActivity
                                 .class));
                         return true;
                     default:
@@ -230,6 +172,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+
     //sign out method
     public void signOut() {
         auth.signOut();
@@ -237,16 +180,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
-    }
-
-    private int getIndexListData(List<Post> listData, String UID) {
-        for (int i = 0; i < listData.size(); i++) {
-            Post post = listData.get(i);
-            if( UID.equals(post.getUid()) ) {
-                return i;
-            }
-        }
-        return 0;
     }
 
 }
