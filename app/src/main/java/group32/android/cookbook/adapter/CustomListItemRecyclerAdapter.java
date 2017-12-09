@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import group32.android.cookbook.EditPostActivity;
@@ -63,7 +65,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
         holder.txtTitle.setText(post.getTitle());
         holder.txtAuthor.setText(post.getAuthor());
         holder.txtRecipe.setText(post.getRecipe());
-        holder.txtStar.setText(String.valueOf(((Post)postData.get(position)).getStar()));
+        holder.txtStar.setText(String.valueOf(round(post.getStar(), 1)));
         holder.txtTotalVotes.setText(String.valueOf(post.getTotalVotes()));
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +112,15 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     public int getItemCount()
     {
         return postData.size();
+    }
+
+    //Rounding number
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 
