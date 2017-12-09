@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,14 +31,17 @@ import group32.android.cookbook.models.User;
 
 public class NewPostActivity extends AppCompatActivity {
     //View
-    private Button Btn_upload_image, Btn_Done;
-    private EditText Title, Recipe;
+    private Button btnUploadImage, btnDone;
+    private EditText titleEdtText, recipeEdtText;
+    private ImageView uploadedImgView;
+
+    //Variable
     private User _user;
     private String image;
     private Uri selectedImage;
     private static final int SELECT_PHOTO = 100;
     //Firebase instance
-    private DatabaseReference PostsReference, UserRef, userPostRef;
+    private DatabaseReference postsReference, userRef, userPostRef;
     private DatabaseReference root_db;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth.AuthStateListener authListener;
@@ -48,18 +52,20 @@ public class NewPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
         //View
-        Btn_Done = findViewById(R.id.btn_done);
-        Btn_upload_image = findViewById(R.id.btn_upload_image);
-        Title = findViewById(R.id.edt_title);
-        Recipe = findViewById(R.id.edt_recipe);
+        btnDone = findViewById(R.id.btn_done);
+        btnUploadImage = findViewById(R.id.btn_upload_image);
+        titleEdtText = findViewById(R.id.edt_title);
+        recipeEdtText = findViewById(R.id.edt_recipe);
+        uploadedImgView = findViewById(R.id.iv_uploaded_photo);
+
 
         //Firebase Reference
         root_db = FirebaseDatabase.getInstance().getReference();
-        PostsReference = root_db.child("posts");
-        UserRef = root_db.child("users").child(getUid());
+        postsReference = root_db.child("posts");
+        userRef = root_db.child("users").child(getUid());
         userPostRef = root_db.child("users").child(getUid()).child("user-posts");
         //get user information
-        UserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 _user = dataSnapshot.getValue(User.class);
@@ -73,7 +79,7 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
         //handle button event
-        Btn_upload_image.setOnClickListener(new View.OnClickListener() {
+        btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -84,7 +90,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         });
 
-        Btn_Done.setOnClickListener(new View.OnClickListener() {
+        btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleDoneProcess();
@@ -124,19 +130,19 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     private void handleDoneProcess() {
-        String title = Title.getText().toString();
-        String recipe = Recipe.getText().toString();
+        String title = titleEdtText.getText().toString();
+        String recipe = recipeEdtText.getText().toString();
         String image;
 
-        // Title is required
+        // titleEdtText is required
         if (TextUtils.isEmpty(title)) {
-            Title.setError("Required");
+            titleEdtText.setError("Required");
             return;
         }
 
         // Body is required
         if (TextUtils.isEmpty(recipe)) {
-            Recipe.setError("Required");
+            recipeEdtText.setError("Required");
             return;
         }
 
@@ -153,15 +159,15 @@ public class NewPostActivity extends AppCompatActivity {
         Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
 
         //initial new post
-        final String key = PostsReference.push().getKey();
+        final String key = postsReference.push().getKey();
         final Post _newPost = new Post(_user.getDisplayName(), title, recipe, image);
         Log.w("NEW Post", "Created a post instance " + _newPost.getAuthor() + _newPost.getTitle() + _newPost.getRecipe() +_newPost.getUid() + _newPost.getStar());
         //put new post to firebase
 
-        PostsReference.child(key).setValue(_newPost);
-        //PostsReference.push().setValue(_newPost);
+        postsReference.child(key).setValue(_newPost);
+        //postsReference.push().setValue(_newPost);
         Log.w("NEW Post", "set value to post ref");
-        PostsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        postsReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Post post = dataSnapshot.getValue(Post.class);
@@ -183,12 +189,12 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     private void setEditingEnabled(boolean enabled) {
-        Title.setEnabled(enabled);
-        Recipe.setEnabled(enabled);
+        titleEdtText.setEnabled(enabled);
+        recipeEdtText.setEnabled(enabled);
         if (enabled) {
-            Btn_Done.setVisibility(View.VISIBLE);
+            btnDone.setVisibility(View.VISIBLE);
         } else {
-            Btn_Done.setVisibility(View.GONE);
+            btnDone.setVisibility(View.GONE);
         }
     }
 
@@ -203,7 +209,7 @@ public class NewPostActivity extends AppCompatActivity {
             selectedImage = data.getData();
             path = selectedImage.getLastPathSegment();
             Toast.makeText(NewPostActivity.this, "Image: " + path, Toast.LENGTH_LONG).show();
-            //Set name of picked image here
+            uploadedImgView.setImageURI(selectedImage);
         }
     }
 
