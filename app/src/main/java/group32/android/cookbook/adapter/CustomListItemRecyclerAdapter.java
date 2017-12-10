@@ -17,8 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
+import group32.android.cookbook.EditPostActivity;
+import group32.android.cookbook.HomeActivity;
 import group32.android.cookbook.PostDetailsActivity;
 import group32.android.cookbook.R;
 import group32.android.cookbook.models.Post;
@@ -49,7 +53,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     }
 
     @Override
-    public void onBindViewHolder(CustomListItemRecyclerAdapter.PostHolder holder, final int position)
+    public void onBindViewHolder(final CustomListItemRecyclerAdapter.PostHolder holder, final int position)
     {
         Post post = postData.get(position);
         imageRef = FirebaseStorage.getInstance().getReference().child("images/" + postData.get(position).getImage());
@@ -61,8 +65,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
         holder.txtTitle.setText(post.getTitle());
         holder.txtAuthor.setText(post.getAuthor());
         holder.txtRecipe.setText(post.getRecipe());
-        holder.ratingBar.setRating((float) post.getStar());
-
+        holder.txtStar.setText(String.valueOf(round(post.getStar(), 1)));
         holder.txtTotalVotes.setText(String.valueOf(post.getTotalVotes()));
         holder.itemview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +93,9 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
 
     //Tạo class exten từ ViewHolder , khai báo các biến trong item_for_list_posts.yml
     public class PostHolder extends RecyclerView.ViewHolder{
-        TextView txtTitle, txtAuthor, txtRecipe,txtTotalVotes;
+        TextView txtTitle, txtAuthor, txtRecipe,txtTotalVotes,txtStar;
         ImageView imageView;
         View itemview;
-        RatingBar ratingBar;
         public PostHolder(View view){
             super(view);
             txtTitle =  view.findViewById(R.id.txtTitle);
@@ -102,7 +104,7 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
             imageView = view.findViewById(R.id.iv_item_image);
             txtTotalVotes =  view.findViewById(R.id.txtTotalVotes);
             itemview = view;
-            ratingBar = view.findViewById(R.id.rating_bar);
+            txtStar =  view.findViewById(R.id.txtStar);
         }
     }
 
@@ -110,6 +112,15 @@ public class CustomListItemRecyclerAdapter extends RecyclerView.Adapter<CustomLi
     public int getItemCount()
     {
         return postData.size();
+    }
+
+    //Rounding number
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 

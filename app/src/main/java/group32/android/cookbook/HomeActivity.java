@@ -86,7 +86,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
-
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -230,7 +229,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
 
     //sign out method
     public void signOut() {

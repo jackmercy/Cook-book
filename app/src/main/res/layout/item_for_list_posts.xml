@@ -71,13 +71,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
-                        <RatingBar
-                            android:id="@+id/rating_bar"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/txtStar"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:numStars="5"
-                            android:stepSize="0.5"
-                            style="?android:attr/ratingBarStyleSmall"/>
+                            android:text="0.0"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="/"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="5"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/rc_item_vote"/>
 
                         <TextView
                             android:layout_width="wrap_content"

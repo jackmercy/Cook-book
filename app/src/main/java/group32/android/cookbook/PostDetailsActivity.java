@@ -100,10 +100,10 @@ public class PostDetailsActivity extends AppCompatActivity
         ratingBarView.setOnRatingBarChangeListener(this);
 
         //Retrive uid from put extra
-
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
+                Log.d("EXTRA_POST_KEY : ","Fail");
                 newPostUid = null;
                 Intent intent = new Intent(PostDetailsActivity.this, HomeActivity.class);
                 startActivity(intent);
@@ -186,6 +186,7 @@ public class PostDetailsActivity extends AppCompatActivity
     public void onBackPressed() {
         super.onBackPressed();
         //Back to previous activity
+//        startActivity(new Intent(PostDetailsActivity.this,HomeActivity.class));
         finish();
     }*/
 
