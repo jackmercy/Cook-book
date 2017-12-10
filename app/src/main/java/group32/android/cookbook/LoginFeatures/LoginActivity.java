@@ -28,9 +28,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import group32.android.cookbook.HomeActivity;
 import group32.android.cookbook.R;
+import group32.android.cookbook.models.User;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,9 +187,33 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String name = user.getDisplayName();
+                    String email = user.getEmail();
+                    String uid = user.getUid();
+                    assert name != null;
+                    Log.d("Facebook login", uid + " " + email+ " " + name );
+                    //
+                    if(email == null) {
+                        email = uid + "@gmail.com";
+                    }
+                    User _user = new User(name, email);
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    mDatabase.child("users").child(uid).setValue(_user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                //Toast.makeText(getApplicationContext(), "You have been successfully ", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                 }
 
             }

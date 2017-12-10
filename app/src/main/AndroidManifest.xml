@@ -16,7 +16,8 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
+        <meta-data android:name="android.max_aspect"
+            android:value="ratio_float"/>
         <activity android:name=".EditProfileActivity"></activity>
         <activity android:name=".LoginFeatures.LoginActivity" />
         <activity android:name=".LoginFeatures.SignupActivity" />
