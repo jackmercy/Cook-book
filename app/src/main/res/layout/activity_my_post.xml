@@ -39,11 +39,14 @@
                 android:layout_width="45dp"
                 android:layout_height="36dp"
                 android:layout_marginEnd="50dp"
-                android:background="@android:drawable/ic_menu_more"
+                android:src="@drawable/ic_more_ver"
+                android:background="@color/colorAccent"
+                android:tint="@color/colorPrimary"
                 android:contentDescription="@string/title_activity_profile"
                 android:onClick="showPopup"
                 app:layout_anchor="@+id/home_name"
                 app:layout_anchorGravity="right" />
+
         </android.support.v7.widget.ActionMenuView>
         <!---->
     </android.support.v7.widget.Toolbar>

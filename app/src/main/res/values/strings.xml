@@ -36,8 +36,11 @@
     <string name="upload_image">Change Image</string>
     <string name="hint_title">Title</string>
     <string name="hint_recipe">Recipe</string>
-    //Facebook
+    <!--Facebook-->
     <string name="facebook_app_id">190781848160248</string>
     <string name="fb_login_protocol_scheme">fb190781848160248</string>
+
+    <!--Post detail-->
+    <string name="commentHolder">Enter your comment here...</string>
 
 </resources>
