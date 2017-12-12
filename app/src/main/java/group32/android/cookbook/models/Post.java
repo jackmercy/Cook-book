@@ -1,7 +1,5 @@
 package group32.android.cookbook.models;
 
-import android.net.Uri;
-
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**

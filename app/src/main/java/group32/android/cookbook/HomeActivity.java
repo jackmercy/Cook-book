@@ -36,13 +36,13 @@ public class HomeActivity extends AppCompatActivity {
     private CustomListItemRecyclerAdapter adapter;
     private LinearLayoutManager layoutManager;
     private List<Post> listData = new ArrayList<>();
+    private List<Post> listTemp = new ArrayList<>();
     //public ProgressBar progressBar;
     private DatabaseReference mPostsReference;
     private DatabaseReference root_db;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
-    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -53,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
-
         //activity instance
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -95,11 +94,11 @@ public class HomeActivity extends AppCompatActivity {
         listData = new ArrayList<>();
         adapter = new CustomListItemRecyclerAdapter(this, listData);
         recyclerView.setAdapter(adapter);
-        //activity instance
+        /*//activity instance
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(1);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);*/
 
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
@@ -112,6 +111,7 @@ public class HomeActivity extends AppCompatActivity {
                 newPost.setUid(postSnapshot.getKey());
                 Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
                 listData.add(newPost);
+                //listTemp = listData;
                 adapter.notifyDataSetChanged();
             }
 
@@ -122,8 +122,12 @@ public class HomeActivity extends AppCompatActivity {
                 newPost.setUid(postSnapshot.getKey());
                 Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
                 int index = getIndexListData(listData, newPost.getUid());
-                listData.set(index, newPost);
-                adapter.notifyDataSetChanged();
+                /*if (listData.size() == 0 && listTemp.size() != 0 || listData.size() > listTemp.size())
+                    listData = listTemp;*/
+                if(listData.size() > 0) {
+                    listData.set(index, newPost);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
