@@ -15,9 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import group32.android.cookbook.LoginFeatures.LoginActivity;
-import group32.android.cookbook.LoginFeatures.SignupActivity;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -28,7 +29,8 @@ public class EditProfileActivity extends AppCompatActivity {
     public ProgressBar progressBar;
     public FirebaseAuth.AuthStateListener authListener;
     public FirebaseAuth auth;
-
+    private DatabaseReference mPostsReference;
+    private DatabaseReference root_db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,12 +109,16 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 if (user != null && !newEmail.getText().toString().trim().equals("")) {
+                    root_db = FirebaseDatabase.getInstance().getReference();
+                    mPostsReference = root_db.child("users").child(getUid()).child("email");
+                    mPostsReference.setValue(newEmail.getText().toString().trim());
                     user.updateEmail(newEmail.getText().toString().trim())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(EditProfileActivity.this, "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(EditProfileActivity.this,
+                                                "Email address is updated. Please sign in with new email id!", Toast.LENGTH_LONG).show();
                                         signOut();
                                         progressBar.setVisibility(View.GONE);
                                     } else {
@@ -231,19 +237,12 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 if (!newUsername.getText().toString().trim().equals("")) {
-                    auth.sendPasswordResetEmail(newUsername.getText().toString().trim())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(EditProfileActivity.this, "Username is updated!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    } else {
-                                        Toast.makeText(EditProfileActivity.this, "Failed to update username!", Toast.LENGTH_SHORT).show();
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
+                    root_db = FirebaseDatabase.getInstance().getReference();
+                    mPostsReference = root_db.child("users").child(getUid());
+                    mPostsReference.child("displayName").setValue(newUsername.getText().toString().trim());
+                    Toast.makeText(EditProfileActivity.this, "Username is updated!", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+
                 } else {
                     newUsername.setError("Enter New Username");
                     progressBar.setVisibility(View.GONE);
@@ -284,4 +283,9 @@ public class EditProfileActivity extends AppCompatActivity {
             auth.removeAuthStateListener(authListener);
         }
     }
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
 }
+

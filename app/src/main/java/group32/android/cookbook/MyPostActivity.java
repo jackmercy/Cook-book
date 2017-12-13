@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,6 @@ import java.util.List;
 import group32.android.cookbook.LoginFeatures.LoginActivity;
 import group32.android.cookbook.adapter.CustomListItemRecyclerAdapter;
 import group32.android.cookbook.models.Post;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by trung on 12/3/2017.
@@ -63,14 +61,14 @@ public class MyPostActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(1);
         recyclerView.setLayoutManager(layoutManager);
+
         adapter = new CustomListItemRecyclerAdapter(this, listData);
         recyclerView.setAdapter(adapter);
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
-//        mPostsReference = root_db.child("posts");
         mPostsReference = root_db.child("users").child(getUid()).child("user-posts");
 //        get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        // final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is logged in or not
         authListener = new FirebaseAuth.AuthStateListener() {
@@ -92,35 +90,67 @@ public class MyPostActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //progressBar.setVisibility(View.GONE);
+        //get firebase auth instance
+        auth = FirebaseAuth.getInstance();
+        listData = new ArrayList<>();
+        adapter = new CustomListItemRecyclerAdapter(this, listData);
+        recyclerView.setAdapter(adapter);
+        //Initialize Database
+        root_db = FirebaseDatabase.getInstance().getReference();
+        mPostsReference = root_db.child("users").child(getUid()).child("user-posts");
+
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot postSnapshot, String s) {
+                Post newPost = postSnapshot.getValue(Post.class);
+                assert newPost != null;
+                newPost.setUid(postSnapshot.getKey());
+                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
+                listData.add(newPost);
+                //listTemp = listData;
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot postSnapshot, String s) {
+                Post newPost = postSnapshot.getValue(Post.class);
+                assert newPost != null;
+                newPost.setUid(postSnapshot.getKey());
+                Log.d("UID POST", String.format("Uid is %s", newPost.getUid()+ " Pre Key="+s));
+                int index = getIndexListData(listData, newPost.getUid());
+                /*if (listData.size() == 0 && listTemp.size() != 0 || listData.size() > listTemp.size())
+                    listData = listTemp;*/
+                if(listData.size() > 0) {
+                    listData.set(index, newPost);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot postSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot postSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Home activity", "Post: onCancelled", databaseError.toException());
+                Toast.makeText(getApplicationContext(), "Failed to load posts.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        mPostsReference.addChildEventListener(childEventListener);
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
-        //Retrieving basic data (1 key)
-        // Add value event listener to the post
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get post information
-                Log.d("My Post Activity", "Post details: ");
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Post newPost = postSnapshot.getValue(Post.class);
-                    assert newPost != null;
-                    newPost.setUid(postSnapshot.getKey());
-                    Log.d("UID POST", String.format("Uid is %s", newPost.getUid()));
-                    listData.add(newPost);
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Something wrong!!!", Toast.LENGTH_SHORT).show();
-            }
-        };
-        mPostsReference.addValueEventListener(valueEventListener);
     }
 
     @Override
@@ -182,4 +212,13 @@ public class MyPostActivity extends AppCompatActivity {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+    private int getIndexListData(List<Post> listData, String UID) {
+        for (int i = 0; i < listData.size(); i++) {
+            Post post = listData.get(i);
+            if( UID.equals(post.getUid()) ) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }

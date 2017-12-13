@@ -202,9 +202,14 @@ public class PostDetailsActivity extends AppCompatActivity
             Comment newComment = new Comment();
             newComment.setAuthor(_user.getDisplayName());
             newComment.setMessage(editComment.getText().toString());
-            arrComments.add(newComment);
-            editComment.getText().clear();
+
             itemDatabse.child("post-comment").push().setValue(newComment);
+
+            arrComments.add(newComment);
+            adapter.notifyDataSetChanged();
+
+            editComment.getText().clear();
+
         }
         else {
             Toast.makeText(getApplicationContext(),"Username is null",Toast.LENGTH_SHORT).show();
