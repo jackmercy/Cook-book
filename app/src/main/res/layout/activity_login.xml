@@ -70,9 +70,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/btn_login"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/white" />
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/btn_loginfacebook"

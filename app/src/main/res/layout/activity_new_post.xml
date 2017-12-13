@@ -35,7 +35,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="12dp"
         android:text="@string/done"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/hungry" />
 
     <ImageView
         android:id="@+id/iv_uploaded_photo"
@@ -50,7 +50,7 @@
     <Button
         android:id="@+id/btn_upload_image"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/hungry"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_uploaded_photo"
