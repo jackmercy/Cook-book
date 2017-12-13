@@ -206,7 +206,7 @@ public class PostDetailsActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
 
-        if(_user.getDisplayName() != null){
+        if(_user.getDisplayName() != null && !editComment.getText().toString().trim().equals("")){
             Comment newComment = new Comment();
             newComment.setAuthor(_user.getDisplayName());
             newComment.setMessage(editComment.getText().toString());
@@ -254,7 +254,7 @@ public class PostDetailsActivity extends AppCompatActivity
 
         }
         else {
-            Toast.makeText(getApplicationContext(),"Username is null",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Please type something about this post!",Toast.LENGTH_SHORT).show();
         }
         //Log.d("POST DETAILS","USER: "+ _user.getDisplayName() + " " + _user.getEmail());
         //User user = new User("Alan", "alannguyen@gmail.com");
