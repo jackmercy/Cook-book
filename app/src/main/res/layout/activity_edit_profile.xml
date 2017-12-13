@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/color_button"
+            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -31,7 +31,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="@color/color_backgroud"
+        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
@@ -39,11 +39,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_email"
+            android:textColor="@color/black"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
 
         <EditText
             android:id="@+id/new_email"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_new_email"
@@ -52,6 +54,7 @@
 
         <EditText
             android:id="@+id/new_username"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
@@ -63,6 +66,7 @@
 
         <EditText
             android:id="@+id/newPassword"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
@@ -74,46 +78,46 @@
 
         <Button
             android:id="@+id/changeEmail"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/btn_change"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/changePass"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/btn_change"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/changeUsername"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/btn_change"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/send"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/btn_send"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -124,7 +128,7 @@
 
         <Button
             android:id="@+id/change_email_button"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -133,7 +137,7 @@
 
         <Button
             android:id="@+id/change_password_button"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -142,7 +146,7 @@
 
         <Button
             android:id="@+id/change_username_button"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -151,7 +155,7 @@
 
         <Button
             android:id="@+id/sending_pass_reset_button"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -160,7 +164,7 @@
 
         <Button
             android:id="@+id/sign_out"
-            style="?android:textAppearanceSmall"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

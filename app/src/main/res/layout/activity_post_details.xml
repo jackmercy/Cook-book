@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/colorPrimary">
+                android:background="@color/blueLight">
                 <ImageView
                     android:id="@+id/iv_item_image"
                     android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="16dp"
+                    android:textColor="@color/blueDark"
                     android:layout_marginVertical="5dp"
                     android:textStyle="bold"/>
                 <RatingBar
@@ -35,11 +36,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
+                    android:theme="@style/RatingBar"
                     android:stepSize="1.0"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/tv_item_content"
                     android:layout_width="match_parent"
+                    android:textColor="@color/blueDark"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
         </ScrollView>

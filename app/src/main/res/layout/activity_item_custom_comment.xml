@@ -11,11 +11,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/bg_main"/>
+            android:textColor="@color/rc_item_title"/>
         <TextView
             android:id="@+id/tv_comment_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/btn_login"/>
+            android:textColor="@color/hungryDark"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

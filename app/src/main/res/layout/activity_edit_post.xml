@@ -26,16 +26,16 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/editpost_btn_done"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/editpost_toolbar3"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginTop="11dp"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/done" />
+        android:text="@string/done"
+        android:textColor="@color/hungry" />
 
     <ImageView
         android:id="@+id/editpost_iv_uploaded_photo"
@@ -52,7 +52,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/blueDark"
+        android:textColorHint="@color/hungry"
         android:layout_below="@+id/editpost_iv_uploaded_photo"
         android:id="@+id/editpost_hint_title"
         android:layout_marginTop="30dp"
@@ -60,7 +60,7 @@
         <EditText
             android:id="@+id/editpost_edt_title"
             android:layout_width="match_parent"
-            android:layout_height="67dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/editpost_iv_uploaded_photo"
             android:layout_marginStart="15dp"
@@ -73,13 +73,13 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/blueDark"
+        android:textColorHint="@color/hungry"
         android:layout_below="@+id/editpost_hint_title">
 
         <EditText
             android:id="@+id/editpost_edt_recipe"
             android:layout_width="match_parent"
-            android:layout_height="67dp"
+            android:layout_height="wrap_content"
             android:layout_alignStart="@+id/editpost_edt_title"
             android:layout_below="@+id/editpost_edt_title"
             android:layout_marginStart="15dp"
