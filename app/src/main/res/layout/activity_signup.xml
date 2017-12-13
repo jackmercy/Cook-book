@@ -79,9 +79,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/color_button"
+            android:background="@color/hungry"
             android:text="@string/action_sign_in_short"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <Button
@@ -104,7 +104,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/color_button"
+            android:textColor="@color/blueDark"
             android:textSize="15sp" />
     </LinearLayout>
 
