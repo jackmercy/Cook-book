@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -257,6 +261,52 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void showPopup(View v){
+        final PopupMenu popup = new PopupMenu(this,v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.cookbook_menu, popup.getMenu());
+        ImageButton optionsMenu = findViewById(R.id.options_menu);
+
+        optionsMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.getMenu().findItem(R.id.home_btn).setVisible(true);
+                popup.show();
+            }
+        });
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home_btn:
+                        finish();
+                        return true;
+                    case R.id.new_post_btn:
+                        //navigate to new post activity
+                        startActivity(new Intent(EditProfileActivity.this, NewPostActivity.class));
+                        finish();
+                        return true;
+                    case R.id.options_menu_edit_btn:
+                        startActivity(new Intent(EditProfileActivity.this, EditProfileActivity.class));
+                        //Toast.makeText(getApplicationContext(), "edit clicked", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.id_set:
+                        signOut();
+                        Toast.makeText(getApplicationContext(), "nope", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return true;
+                    case R.id.my_post:
+                        startActivity(new Intent(EditProfileActivity.this, MyPostActivity.class));
+                        finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     //sign out method

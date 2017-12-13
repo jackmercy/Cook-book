@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Cook Book</string>
+    <string name="profile_settings">Profile Settings</string>
     <string name="action_sign_in_short">Register</string>
     <string name="Edit_post">Edit Post</string>
     <string name="email">Email</string>
