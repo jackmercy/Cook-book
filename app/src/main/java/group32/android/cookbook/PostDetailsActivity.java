@@ -62,7 +62,7 @@ public class PostDetailsActivity extends AppCompatActivity
     private boolean ratingChanged;
 
     private ImageView ivItemImage;
-    private TextView tvItemContent, tvItemTitle;
+    private TextView tvItemContent, tvItemTitle, tvAuthor;
     private EditText editComment;
     private ListView lvComments;
     private Button btnComment;
@@ -98,6 +98,7 @@ public class PostDetailsActivity extends AppCompatActivity
         ivItemImage = findViewById(R.id.iv_item_image);
         tvItemContent = findViewById(R.id.tv_item_content);
         tvItemTitle = findViewById(R.id.tv_item_title);
+        tvAuthor = findViewById(R.id.tv_item_author);
         editComment = findViewById(R.id.edit_comment);
         lvComments = findViewById(R.id.lv_comments);
         ratingBarView = findViewById(R.id.rating_bar);
@@ -151,6 +152,7 @@ public class PostDetailsActivity extends AppCompatActivity
                 }
                 // Assign data into view
                 tvItemTitle.setText(postDetail.getTitle());
+                tvAuthor.setText(postDetail.getAuthor());
                 tvItemContent.setText(postDetail.getRecipe());
                 ratingBarView.setRating((float) postDetail.getStar());
                 //Data processing
