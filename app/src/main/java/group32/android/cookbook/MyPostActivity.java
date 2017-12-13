@@ -178,6 +178,9 @@ public class MyPostActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.home_btn:
+                        finish();
+                        return true;
                     case R.id.new_post_btn:
                         //navigate to new post activity
                         startActivity(new Intent(MyPostActivity.this, NewPostActivity.class));

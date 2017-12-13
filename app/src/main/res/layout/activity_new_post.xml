@@ -82,16 +82,20 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/color_text"
         android:layout_below="@+id/hint_title">
+
         <EditText
             android:id="@+id/edt_recipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="166dp"
             android:layout_alignStart="@+id/edt_title"
             android:layout_below="@+id/edt_title"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Recipe"/>
+            android:hint="Recipe"
+            android:inputType="textMultiLine"
+            android:lines="10"
+            android:maxLines="10"
+            android:minLines="6" />
     </android.support.design.widget.TextInputLayout>
 </RelativeLayout>
