@@ -50,7 +50,7 @@ public class PostDetailsActivity extends AppCompatActivity
     private StorageReference imageRef;
     private StorageReference childImageRef;
     private ValueEventListener mPostListener;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef, userPostRef;
     private DatabaseReference dbRef;
     private ItemDetail item = new ItemDetail();
     private Post postDetail = new Post();
@@ -184,6 +184,11 @@ public class PostDetailsActivity extends AppCompatActivity
         itemDatabse.child("star").setValue(postDetail.getStar());
         itemDatabse.child("starCounter").setValue(postDetail.getStarCounter());
         itemDatabse.child("totalVotes").setValue(postDetail.getTotalVotes());
+        userPostRef = userRef.child("user-posts").child(newPostUid);
+        userPostRef.child("star").setValue(postDetail.getStar());
+        userPostRef.child("starCounter").setValue(postDetail.getStarCounter());
+        userPostRef.child("totalVotes").setValue(postDetail.getTotalVotes());
+
         }
     }
 
