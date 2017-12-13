@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/home_btn"
+        android:title="Home"
+        app:showAsAction="never"
+        android:visible="true"/>
+    <item
         android:id="@+id/new_post_btn"
         android:title="New Post"
         app:showAsAction="never" />

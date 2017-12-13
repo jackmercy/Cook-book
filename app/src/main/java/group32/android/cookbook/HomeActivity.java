@@ -203,6 +203,7 @@ public class HomeActivity extends AppCompatActivity {
         optionsMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                popup.getMenu().findItem(R.id.home_btn).setVisible(false);
                 popup.show();
             }
         });
@@ -225,8 +226,7 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.my_post:
-                        startActivity(new Intent(HomeActivity.this, MyPostActivity
-                                .class));
+                        startActivity(new Intent(HomeActivity.this, MyPostActivity.class));
                         return true;
                     default:
                         return false;

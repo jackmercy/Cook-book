@@ -16,10 +16,41 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@color/color_button"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_gravity="center_vertical|start"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <android.support.v7.widget.ActionMenuView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginEnd="15dp"
+                    android:paddingEnd="130dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textColor="#F8F9FB"
+                    android:textSize="20sp" />
+                <ImageButton
+                    android:id="@+id/options_menu"
+                    style="@style/Widget.AppCompat.ImageButton"
+                    android:layout_width="45dp"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="50dp"
+                    android:src="@drawable/ic_more_ver"
+                    android:background="@color/color_button"
+                    android:tint="@color/white"
+                    android:contentDescription="@string/title_activity_profile"
+                    android:onClick="showPopup"
+                    app:layout_anchor="@+id/toolbar"
+                    app:layout_anchorGravity="right" />
+            </android.support.v7.widget.ActionMenuView>
+        </android.support.v7.widget.Toolbar>
+
 
     </android.support.design.widget.AppBarLayout>
 
