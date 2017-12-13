@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cook Book</string>
     <string name="action_sign_in_short">Register</string>
+    <string name="Edit_post">Edit Post</string>
     <string name="email">Email</string>
     <string name="display_name">Name</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>

@@ -83,12 +83,21 @@ public class CustomListItemForMyPost extends RecyclerView.Adapter<CustomListItem
 
             }
         });
-        holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.itemview.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent i = new Intent(context, EditPostActivity.class);
                 String post_uid = postData.get(position).getUid();
-                return false;
+                if(post_uid != null){
+                    i.putExtra(EXTRA_POST_KEY, post_uid);
+                    context.startActivity(i);
+                }
+                else
+                {
+                    Toast.makeText(context, "Something wrong! This post maybe deleted by author", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+                //return false;
             }
         });
     }

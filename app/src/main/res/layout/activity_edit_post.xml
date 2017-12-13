@@ -20,20 +20,21 @@
             android:layout_above="@+id/editpost_btn_done"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="18dp"
-            android:text="@string/new_post"
+            android:text="@string/Edit_post"
             android:textColor="@color/color_backgroud"
             android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>
 
     <Button
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/editpost_btn_done"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/editpost_toolbar3"
         android:layout_marginEnd="11dp"
         android:layout_marginTop="11dp"
-        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:text="@string/done" />
 
     <ImageView
@@ -43,23 +44,16 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editpost_btn_done"
         android:layout_gravity="center"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="10dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
-    <Button
-        android:id="@+id/editpost_btn_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editpost_btn_done"
-        android:layout_below="@+id/editpost_iv_uploaded_photo"
-        android:layout_marginTop="9dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/upload_image" />
+
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@color/color_text"
-        android:layout_below="@+id/editpost_btn_change"
+        android:layout_below="@+id/editpost_iv_uploaded_photo"
         android:id="@+id/editpost_hint_title"
         >
         <EditText
@@ -84,14 +78,18 @@
         <EditText
             android:id="@+id/editpost_edt_recipe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
             android:layout_alignStart="@+id/editpost_edt_title"
             android:layout_below="@+id/editpost_edt_title"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:ems="10"
+            android:singleLine="false"
             android:hint="Recipe"
-            android:inputType="textPersonName" />
+            android:inputType="textImeMultiLine"
+            android:lines="10"
+            android:maxLines="10"
+            android:minLines="5" />
     </android.support.design.widget.TextInputLayout>
 
 </RelativeLayout>

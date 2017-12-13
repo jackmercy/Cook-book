@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -210,10 +211,44 @@ public class PostDetailsActivity extends AppCompatActivity
 
             itemDatabse.child("post-comment").push().setValue(newComment);
 
-            arrComments.add(newComment);
-            adapter.notifyDataSetChanged();
+            /*arrComments.add(newComment);
+            adapter.notifyDataSetChanged();*/
 
             editComment.getText().clear();
+
+            DatabaseReference commentRef = itemDatabse.child("post-comment");
+
+            ChildEventListener childEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Comment comment = dataSnapshot.getValue(Comment.class);
+                    assert comment!= null;
+                    arrComments.add(comment);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+            commentRef.addChildEventListener(childEventListener);
 
         }
         else {

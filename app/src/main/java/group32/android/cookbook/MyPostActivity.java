@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import group32.android.cookbook.LoginFeatures.LoginActivity;
-import group32.android.cookbook.adapter.CustomListItemRecyclerAdapter;
+import group32.android.cookbook.adapter.CustomListItemForMyPost;
 import group32.android.cookbook.models.Post;
 
 /**
@@ -36,7 +36,7 @@ import group32.android.cookbook.models.Post;
 
 public class MyPostActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private CustomListItemRecyclerAdapter adapter;
+    private CustomListItemForMyPost adapter;
     private LinearLayoutManager layoutManager;
     private List<Post> listData = new ArrayList();
     //public ProgressBar progressBar;
@@ -62,7 +62,7 @@ public class MyPostActivity extends AppCompatActivity {
         layoutManager.setOrientation(1);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CustomListItemRecyclerAdapter(this, listData);
+        adapter = new CustomListItemForMyPost(this, listData);
         recyclerView.setAdapter(adapter);
         // Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();
@@ -93,7 +93,7 @@ public class MyPostActivity extends AppCompatActivity {
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
         listData = new ArrayList<>();
-        adapter = new CustomListItemRecyclerAdapter(this, listData);
+        adapter = new CustomListItemForMyPost(this, listData);
         recyclerView.setAdapter(adapter);
         //Initialize Database
         root_db = FirebaseDatabase.getInstance().getReference();

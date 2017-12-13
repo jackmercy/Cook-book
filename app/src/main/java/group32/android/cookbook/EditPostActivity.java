@@ -42,7 +42,7 @@ public class EditPostActivity extends AppCompatActivity {
     private EditText editpost_edt_title;
     private EditText editpost_edt_recipe;
     private Button editpost_btn_done;
-    private Button editpost_btn_change;
+    //private Button editpost_btn_change;
     private ImageView editpost_iv_uploaded_photo;
     private Post postDetail = new Post();
     private StorageReference childImageRef,imageRef;;
@@ -86,7 +86,7 @@ public class EditPostActivity extends AppCompatActivity {
         editpost_edt_title = (EditText) findViewById(R.id.editpost_edt_title);
         editpost_edt_recipe = (EditText)findViewById(R.id.editpost_edt_recipe);
         editpost_btn_done = (Button)findViewById(R.id.editpost_btn_done);
-        editpost_btn_change = (Button)findViewById(R.id.editpost_btn_change);
+        //editpost_btn_change = (Button)findViewById(R.id.editpost_btn_change);
         editpost_iv_uploaded_photo = (ImageView)findViewById(R.id.editpost_iv_uploaded_photo);
 
         //Retrive uid from put extra
@@ -112,15 +112,15 @@ public class EditPostActivity extends AppCompatActivity {
         imageRef = FirebaseStorage.getInstance().getReference();
 
         //Handle Button
-        editpost_btn_change.setOnClickListener(new View.OnClickListener() {
+        /*editpost_btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
+                photoPickerIntent.setType("image*//*");
                 photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(photoPickerIntent, "Select Picture"), SELECT_PHOTO);
             }
-        });
+        });*/
 
         editpost_btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +250,8 @@ public class EditPostActivity extends AppCompatActivity {
                 Log.w("Edit Post", "Jump into user-posts");
                 setEditingEnabled(true);
                 Toast.makeText(EditPostActivity.this, "Update post success!!", Toast.LENGTH_SHORT).show();
-//                finish();
+
+                finish();
             }
 
             @Override
