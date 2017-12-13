@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
@@ -19,12 +19,12 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical|start"
             android:layout_marginEnd="15dp"
-            android:paddingEnd="200dp"
+            android:paddingEnd="300dp"
             android:paddingStart="20dp"
             android:paddingTop="10dp"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
 
@@ -40,8 +40,8 @@
                 android:layout_height="36dp"
                 android:layout_marginEnd="50dp"
                 android:src="@drawable/ic_more_ver"
-                android:background="@color/colorAccent"
-                android:tint="@color/colorPrimary"
+                android:background="@color/colorPrimary"
+                android:tint="@color/white"
                 android:contentDescription="@string/title_activity_profile"
                 android:onClick="showPopup"
                 app:layout_anchor="@+id/home_name"
