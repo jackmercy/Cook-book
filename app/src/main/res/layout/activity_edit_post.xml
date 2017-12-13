@@ -52,16 +52,17 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/color_text"
+        android:textColorHint="@color/blueDark"
         android:layout_below="@+id/editpost_iv_uploaded_photo"
         android:id="@+id/editpost_hint_title"
+        android:layout_marginTop="30dp"
         >
         <EditText
             android:id="@+id/editpost_edt_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="67dp"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/editpost_btn_upload"
+            android:layout_below="@+id/editpost_iv_uploaded_photo"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:ems="10"
@@ -72,7 +73,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/color_text"
+        android:textColorHint="@color/blueDark"
         android:layout_below="@+id/editpost_hint_title">
 
         <EditText
@@ -84,12 +85,12 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:ems="10"
-            android:singleLine="false"
             android:hint="Recipe"
             android:inputType="textImeMultiLine"
             android:lines="10"
             android:maxLines="10"
-            android:minLines="5" />
+            android:minLines="5"
+            android:singleLine="false" />
     </android.support.design.widget.TextInputLayout>
 
 </RelativeLayout>
