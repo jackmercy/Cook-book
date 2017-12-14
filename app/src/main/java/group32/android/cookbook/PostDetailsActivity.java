@@ -146,10 +146,10 @@ public class PostDetailsActivity extends AppCompatActivity
                 postDetail = dataSnapshot.getValue(Post.class);
 
                 //Get comment array
-                for (DataSnapshot commentSnapshot : dataSnapshot.child("post-comment").getChildren()) {
+                /*for (DataSnapshot commentSnapshot : dataSnapshot.child("post-comment").getChildren()) {
                     Comment newComment = commentSnapshot.getValue(Comment.class);
                     arrComments.add(newComment);
-                }
+                }*/
                 // Assign data into view
                 tvItemTitle.setText(postDetail.getTitle());
                 tvAuthor.setText(postDetail.getAuthor());
@@ -204,6 +204,44 @@ public class PostDetailsActivity extends AppCompatActivity
     }*/
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        DatabaseReference commentRef = itemDatabse.child("post-comment");
+
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Comment comment = dataSnapshot.getValue(Comment.class);
+                assert comment!= null;
+                arrComments.add(comment);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        commentRef.addChildEventListener(childEventListener);
+    }
+
+    @Override
     public void onClick(View view) {
 
         if(_user.getDisplayName() != null && !editComment.getText().toString().trim().equals("")){
@@ -218,39 +256,7 @@ public class PostDetailsActivity extends AppCompatActivity
 
             editComment.getText().clear();
 
-            DatabaseReference commentRef = itemDatabse.child("post-comment");
 
-            ChildEventListener childEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Comment comment = dataSnapshot.getValue(Comment.class);
-                    assert comment!= null;
-                    arrComments.add(comment);
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-
-            commentRef.addChildEventListener(childEventListener);
 
         }
         else {
