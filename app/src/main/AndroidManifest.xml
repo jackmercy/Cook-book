@@ -18,11 +18,16 @@
             android:value="@string/facebook_app_id" />
         <meta-data android:name="android.max_aspect"
             android:value="ratio_float"/>
-        <activity android:name=".EditProfileActivity"/>
-        <activity android:name=".EditPostActivity"/>
-        <activity android:name=".LoginFeatures.LoginActivity" />
-        <activity android:name=".LoginFeatures.SignupActivity" />
-        <activity android:name=".LoginFeatures.ResetPasswordActivity" />
+        <activity android:name=".EditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EditPostActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginFeatures.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginFeatures.SignupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginFeatures.ResetPasswordActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".MyPostActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
@@ -33,8 +38,10 @@
         </activity>
         <activity
             android:name=".PostDetailsActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".NewPostActivity"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewPostActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
